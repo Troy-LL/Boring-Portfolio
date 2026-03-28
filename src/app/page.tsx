@@ -1,4 +1,5 @@
 import Experience from "@/components/Experience";
+import Projects from "@/components/Projects";
 
 export default function Home() {
   return (
@@ -41,6 +42,11 @@ export default function Home() {
       {/* Experience Section */}
       <div className="w-full">
         <Experience />
+      </div>
+
+      {/* Projects Section */}
+      <div className="w-full">
+        <Projects />
       </div>
     </main>
   );

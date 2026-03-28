@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "aos": "^2.3.4",
+    "lucide-react": "^1.7.0",
     "luxon": "^3.7.2",
     "next": "14.2.0",
     "react": "^18",
