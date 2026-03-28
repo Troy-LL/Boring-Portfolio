@@ -1,18 +1,19 @@
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
+import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground flex flex-col items-center selection:bg-accent selection:text-foreground scroll-smooth">
       {/* Hero Section */}
-      <div className="min-h-screen w-full flex flex-col items-center justify-center p-8">
+      <div id="home" className="min-h-screen w-full flex flex-col items-center justify-center p-8">
         <div className="max-w-4xl mx-auto w-full flex flex-col space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
           
           {/* Top Badges / Subtitle */}
           <div className="flex flex-wrap gap-3 uppercase tracking-widest text-xs font-semibold text-muted-foreground">
-            <span className="px-3 py-1 rounded-full border border-muted bg-muted/20">IT Student</span>
+            <span className="px-3 py-1 rounded-full border border-muted bg-muted/20 underline decoration-silver decoration-2 underline-offset-4">ASES University Lead</span>
             <span className="px-3 py-1 rounded-full border border-muted bg-muted/20">AI/ML Researcher</span>
-            <span className="px-3 py-1 rounded-full border border-muted bg-muted/20">Community Leader</span>
+            <span className="px-3 py-1 rounded-full border border-muted bg-muted/20">GDG Talent Dev</span>
           </div>
 
           {/* Main Heading */}
@@ -28,25 +29,30 @@ export default function Home() {
 
           {/* CTA Buttons */}
           <div className="pt-8 flex flex-wrap gap-4 items-center">
-            <button className="px-8 py-3 rounded-md bg-foreground text-background font-medium tracking-wide hover:bg-silver transition-colors duration-300">
+            <a href="#projects" className="px-8 py-3 rounded-md bg-foreground text-background font-medium tracking-wide hover:bg-silver transition-colors duration-300">
               View Projects
-            </button>
-            <button className="px-8 py-3 rounded-md bg-transparent border border-muted text-foreground hover:bg-muted/50 transition-colors duration-300">
+            </a>
+            <a href="#contact" className="px-8 py-3 rounded-md bg-transparent border border-muted text-foreground hover:bg-muted/50 transition-colors duration-300">
               Get in Touch
-            </button>
+            </a>
           </div>
           
         </div>
       </div>
 
       {/* Experience Section */}
-      <div className="w-full">
+      <div id="experience" className="w-full">
         <Experience />
       </div>
 
       {/* Projects Section */}
-      <div className="w-full">
+      <div id="projects" className="w-full">
         <Projects />
+      </div>
+
+      {/* Contact Section */}
+      <div className="w-full">
+        <Contact />
       </div>
     </main>
   );

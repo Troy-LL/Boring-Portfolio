@@ -1,7 +1,9 @@
 'use client';
 
 import { PROJECTS } from '@/lib/data';
-import { ExternalLink, Github, Folder } from 'lucide-react';
+import Github from 'lucide-react/dist/esm/icons/github';
+import ExternalLink from 'lucide-react/dist/esm/icons/external-link';
+import Folder from 'lucide-react/dist/esm/icons/folder';
 
 const ProjectCard = ({ project, index }: { project: typeof PROJECTS[0], index: number }) => {
   return (

@@ -1,0 +1,6 @@
+declare module 'lucide-react/dist/esm/icons/github';
+declare module 'lucide-react/dist/esm/icons/external-link';
+declare module 'lucide-react/dist/esm/icons/folder';
+declare module 'lucide-react/dist/esm/icons/linkedin';
+declare module 'lucide-react/dist/esm/icons/mail';
+declare module 'lucide-react/dist/esm/icons/send';
