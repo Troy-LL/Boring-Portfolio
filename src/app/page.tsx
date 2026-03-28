@@ -11,9 +11,9 @@ export default function Home() {
           
           {/* Top Badges / Subtitle */}
           <div className="flex flex-wrap gap-3 uppercase tracking-widest text-xs font-semibold text-muted-foreground">
-            <span className="px-3 py-1 rounded-full border border-muted bg-muted/20 underline decoration-silver decoration-2 underline-offset-4">ASES University Lead</span>
+            <span className="px-3 py-1 rounded-full border border-muted bg-muted/20">IT Student</span>
             <span className="px-3 py-1 rounded-full border border-muted bg-muted/20">AI/ML Researcher</span>
-            <span className="px-3 py-1 rounded-full border border-muted bg-muted/20">GDG Talent Dev</span>
+            <span className="px-3 py-1 rounded-full border border-muted bg-muted/20">Full-Stack Dev</span>
           </div>
 
           {/* Main Heading */}

@@ -51,6 +51,8 @@ const ExperienceCard = ({ exp, index }: { exp: typeof EXPERIENCE[0], index: numb
 };
 
 export default function Experience() {
+  const [showAll, setShowAll] = useState(false);
+
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -58,6 +60,8 @@ export default function Experience() {
       easing: 'ease-out-quart',
     });
   }, []);
+
+  const visibleExperience = showAll ? EXPERIENCE : EXPERIENCE.slice(0, 3);
 
   return (
     <section id="experience" className="w-full max-w-4xl mx-auto py-24 px-8">
@@ -70,11 +74,26 @@ export default function Experience() {
         <div className="h-[1px] flex-grow bg-muted" />
       </h2>
 
-      <div className="flex flex-col">
-        {EXPERIENCE.map((exp, i) => (
+      <div className="flex flex-col relative">
+        {visibleExperience.map((exp, i) => (
           <ExperienceCard key={i} exp={exp} index={i} />
         ))}
+
+        {!showAll && EXPERIENCE.length > 3 && (
+          <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+        )}
       </div>
+
+      {EXPERIENCE.length > 3 && (
+        <div className="mt-8 flex justify-center">
+          <button 
+            onClick={() => setShowAll(!showAll)}
+            className="px-8 py-3 rounded-md border border-muted text-foreground font-medium tracking-wide hover:bg-muted/50 transition-all duration-300"
+          >
+            {showAll ? 'See Less' : 'See More Positions'}
+          </button>
+        </div>
+      )}
     </section>
   );
 }

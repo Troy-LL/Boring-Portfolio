@@ -4,6 +4,7 @@ import Github from 'lucide-react/dist/esm/icons/github';
 import Linkedin from 'lucide-react/dist/esm/icons/linkedin';
 import Mail from 'lucide-react/dist/esm/icons/mail';
 import Send from 'lucide-react/dist/esm/icons/send';
+import Instagram from 'lucide-react/dist/esm/icons/instagram';
 
 const SOCIAL_LINKS = [
   {
@@ -13,6 +14,12 @@ const SOCIAL_LINKS = [
     label: "Troy-LL"
   },
   {
+    name: "Instagram",
+    href: "https://www.instagram.com/isametroy_/",
+    icon: Instagram,
+    label: "@isametroy_"
+  },
+  {
     name: "LinkedIn",
     href: "https://linkedin.com/in/troylazaro",
     icon: Linkedin,
@@ -20,9 +27,9 @@ const SOCIAL_LINKS = [
   },
   {
     name: "Email",
-    href: "mailto:troylazaro.work@gmail.com",
+    href: "mailto:troylazaro09@gmail.com",
     icon: Mail,
-    label: "troylazaro.work@gmail.com"
+    label: "troylazaro09@gmail.com"
   }
 ];
 
@@ -40,7 +47,7 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-2xl">
           {SOCIAL_LINKS.map((link) => (
             <a
               key={link.name}
@@ -62,7 +69,7 @@ export default function Contact() {
 
         <div className="pt-12">
           <a
-            href="mailto:troylazaro.work@gmail.com"
+            href="mailto:troylazaro09@gmail.com"
             className="inline-flex items-center space-x-3 px-10 py-4 bg-foreground text-background font-bold tracking-widest uppercase text-sm rounded-full hover:bg-silver transition-all duration-300"
           >
             <Send size={18} />
