@@ -29,6 +29,9 @@ const config: Config = {
           paper: "#FAFAFA",
         },
       },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
