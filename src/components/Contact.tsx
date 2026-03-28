@@ -8,6 +8,7 @@ import Check from 'lucide-react/dist/esm/icons/check';
 import Copy from 'lucide-react/dist/esm/icons/copy';
 import Instagram from 'lucide-react/dist/esm/icons/instagram';
 import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
+import Terminal from 'lucide-react/dist/esm/icons/terminal';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -263,9 +264,18 @@ export default function Contact() {
           </button>
         </div>
 
-        <footer className="pt-24 text-muted-foreground text-[10px] uppercase tracking-[0.3em] flex flex-col space-y-2">
+        <footer className="pt-24 text-muted-foreground text-[10px] uppercase tracking-[0.3em] flex flex-col space-y-2 items-center">
           <span>&copy; {new Date().getFullYear()} Troy Lauren T. Lazaro</span>
-          <span className="text-silver/60">Life is too short to be boring.</span>
+          <a 
+            href="https://tlportfoliocreative.vercel.app/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="group flex items-center gap-1 text-silver/60 hover:text-white transition-colors duration-300 cursor-pointer"
+            title="Switch to Creative Portfolio"
+          >
+            <span>Life is too short to be boring.</span>
+            <Terminal size={12} className="opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </a>
         </footer>
       </div>
     </section>
