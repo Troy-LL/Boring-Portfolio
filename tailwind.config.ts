@@ -8,6 +8,27 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        background: "#0F0F0F", // Ink Black
+        foreground: "#FAFAFA", // Paper White
+        muted: {
+          DEFAULT: "#1C1C1C", // Obsidian
+          foreground: "#8E8E93", // Cool Gray
+        },
+        accent: {
+          DEFAULT: "#C0C0C0", // Silver
+          foreground: "#0F0F0F",
+        },
+        ink: "#0F0F0F",
+        obsidian: "#1C1C1C",
+        gray: {
+          cool: "#8E8E93",
+        },
+        silver: "#C0C0C0",
+        white: {
+          paper: "#FAFAFA",
+        },
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
