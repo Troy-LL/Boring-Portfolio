@@ -100,7 +100,7 @@ export const PROJECTS: Project[] = [
     github: "https://github.com/Troy-LL/skill-swipe",
   },
   {
-    title: "ALITAPTAP",
+    title: "ALAITAPTAP",
     category: "ASEAN AI Challenge Submission",
     summary: "AI-powered walking navigation that routes women through safer streets in Metro Manila.",
     description: "AI-powered walking navigation routing users through safer streets in Metro Manila based on real-time crime data and public infrastructure mapping.",

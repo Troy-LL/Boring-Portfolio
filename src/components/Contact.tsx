@@ -7,6 +7,8 @@ import Mail from 'lucide-react/dist/esm/icons/mail';
 import Check from 'lucide-react/dist/esm/icons/check';
 import Copy from 'lucide-react/dist/esm/icons/copy';
 import Instagram from 'lucide-react/dist/esm/icons/instagram';
+import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
 const SOCIAL_LINKS = [
@@ -125,32 +127,46 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-2xl">
-          {SOCIAL_LINKS.map((link) => (
-            <div
-              key={link.name}
-              onClick={link.isCopy ? () => handleCopy() : () => window.open(link.href, '_blank')}
-              className={cn(
-                "group p-6 rounded-xl bg-muted/5 border border-muted/20 transition-all duration-300 flex flex-col items-center space-y-4 cursor-pointer",
-                "hover:border-silver/40 hover:bg-muted/10"
-              )}
-            >
-              <div className="p-3 rounded-full bg-foreground text-background group-hover:scale-110 transition-transform duration-300">
-                <link.icon size={20} />
-              </div>
-              <div className="space-y-1">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">{link.name}</p>
-                <div className="flex items-center gap-2">
-                  <p className="text-sm font-medium text-foreground">{link.label}</p>
-                  {link.isCopy && (
-                    <div className="transition-all duration-300 text-silver/60">
-                      {copied ? <Check size={14} className="text-green-500 animate-in zoom-in" /> : <Copy size={12} className="opacity-0 group-hover:opacity-100" />}
-                    </div>
-                  )}
+        <div className="w-full max-w-2xl flex flex-col items-center space-y-6">
+          <div className="grid grid-cols-2 gap-3 md:gap-8 w-full">
+            {SOCIAL_LINKS.map((link) => (
+              <div
+                key={link.name}
+                onClick={link.isCopy ? () => handleCopy() : () => window.open(link.href, '_blank')}
+                className={cn(
+                  "group p-3 md:p-6 rounded-xl bg-muted/5 border border-muted/20 transition-all duration-300 flex flex-col items-center space-y-2 md:space-y-4 cursor-pointer overflow-hidden",
+                  "hover:border-silver/40 hover:bg-muted/10"
+                )}
+              >
+                <div className="p-2 md:p-3 rounded-full bg-foreground text-background group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                  <link.icon className="w-4 h-4 md:w-5 md:h-5" />
+                </div>
+                <div className="w-full flex flex-col items-center justify-center space-y-0.5 md:space-y-1">
+                  <p className="text-[8px] md:text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">{link.name}</p>
+                  <div className="flex items-center justify-center gap-1 md:gap-2 w-full max-w-full">
+                    <p className="text-[9px] sm:text-xs md:text-sm font-medium text-foreground truncate">
+                      {link.label}
+                    </p>
+                    {link.isCopy && (
+                      <div className="transition-all duration-300 text-silver/60 flex-shrink-0">
+                        {copied ? <Check size={12} className="text-green-500 animate-in zoom-in" /> : <Copy size={10} className="md:w-3 md:h-3 opacity-0 group-hover:opacity-100" />}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          <div>
+            <Link 
+              href="/gallery" 
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-silver/20 text-xs font-bold tracking-widest uppercase text-silver hover:border-silver/50 hover:bg-muted/10 transition-all group shadow-sm hover:shadow-md"
+            >
+              See the Gallery 
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
         </div>
 
         {/* Let's Connect Form */}

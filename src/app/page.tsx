@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground flex flex-col items-center selection:bg-accent selection:text-foreground scroll-smooth">
       {/* Hero Section */}
-      <div id="home" className="min-h-screen w-full flex flex-col items-center justify-center p-8">
+      <div id="home" className="min-h-screen w-full flex flex-col items-center justify-center p-8 pt-32 md:pt-16">
         <div className="max-w-4xl mx-auto w-full flex flex-col space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
           
           {/* Top Badges / Subtitle */}

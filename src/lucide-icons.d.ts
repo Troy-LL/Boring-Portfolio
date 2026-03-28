@@ -11,3 +11,4 @@ declare module 'lucide-react/dist/esm/icons/check';
 declare module 'lucide-react/dist/esm/icons/copy';
 declare module 'lucide-react/dist/esm/icons/chevron-down';
 declare module 'lucide-react/dist/esm/icons/chevron-up';
+declare module 'lucide-react/dist/esm/icons/arrow-right';
