@@ -64,36 +64,40 @@ export default function Experience() {
   const visibleExperience = showAll ? EXPERIENCE : EXPERIENCE.slice(0, 3);
 
   return (
-    <section id="experience" className="w-full max-w-4xl mx-auto py-24 px-8">
-      <h2 
-        data-aos="fade-right" 
-        className="text-3xl font-bold tracking-tight text-foreground mb-16 flex items-center gap-4"
-      >
-        <span className="text-silver font-mono text-lg">01.</span>
-        Experience
-        <div className="h-[1px] flex-grow bg-muted" />
-      </h2>
+    <section id="experience" className="py-24 px-8 w-full border-b border-muted/20">
+      <div className="max-w-4xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-6">
+          <h2 
+            data-aos="fade-right" 
+            className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-4 flex-grow"
+          >
+            <span className="text-silver font-mono text-lg">01.</span>
+            Experience
+            <div className="h-[1px] flex-grow bg-muted" />
+          </h2>
+        </div>
 
-      <div className="flex flex-col relative">
-        {visibleExperience.map((exp, i) => (
-          <ExperienceCard key={i} exp={exp} index={i} />
-        ))}
+        <div className="flex flex-col relative">
+          {visibleExperience.map((exp, i) => (
+            <ExperienceCard key={i} exp={exp} index={i} />
+          ))}
 
-        {!showAll && EXPERIENCE.length > 3 && (
-          <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+          {!showAll && EXPERIENCE.length > 3 && (
+            <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+          )}
+        </div>
+
+        {EXPERIENCE.length > 3 && (
+          <div className="mt-8 flex justify-center">
+            <button 
+              onClick={() => setShowAll(!showAll)}
+              className="px-8 py-3 rounded-md border border-muted text-foreground font-medium tracking-wide hover:bg-muted/50 transition-all duration-300"
+            >
+              {showAll ? 'See Less' : 'See More Positions'}
+            </button>
+          </div>
         )}
       </div>
-
-      {EXPERIENCE.length > 3 && (
-        <div className="mt-8 flex justify-center">
-          <button 
-            onClick={() => setShowAll(!showAll)}
-            className="px-8 py-3 rounded-md border border-muted text-foreground font-medium tracking-wide hover:bg-muted/50 transition-all duration-300"
-          >
-            {showAll ? 'See Less' : 'See More Positions'}
-          </button>
-        </div>
-      )}
     </section>
   );
 }

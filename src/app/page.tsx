@@ -1,4 +1,5 @@
 import Experience from "@/components/Experience";
+import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 
@@ -24,7 +25,7 @@ export default function Home() {
 
           {/* Description / Motto */}
           <p className="max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed">
-            I'm <strong className="text-foreground font-semibold">Troy Lauren T. Lazaro</strong>, operating at the intersection of AI research, full-stack development, and community-driven talent growth. Life is too short to be mediocre, let's build together.
+            I&apos;m <strong className="text-foreground font-semibold">Troy Lauren T. Lazaro</strong>, operating at the intersection of AI research, full-stack development, and community-driven talent growth. Life is too short to be mediocre, let&apos;s build together.
           </p>
 
           {/* CTA Buttons */}
@@ -43,6 +44,11 @@ export default function Home() {
       {/* Experience Section */}
       <div id="experience" className="w-full">
         <Experience />
+      </div>
+
+      {/* Tech Arsenal Section */}
+      <div id="tech" className="w-full">
+        <TechStack />
       </div>
 
       {/* Projects Section */}

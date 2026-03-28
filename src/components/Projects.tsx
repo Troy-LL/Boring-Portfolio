@@ -134,53 +134,60 @@ export default function Projects() {
   const [view, setView] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
+    // Default to list view on mobile for better readability
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) setView('list');
+    
     AOS.refresh();
   }, [view]);
 
   return (
-    <section id="projects" className="w-full max-w-4xl mx-auto py-24 px-8">
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-6">
-        <h2 
-          className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-4 flex-grow"
-        >
-          <span className="text-silver font-mono text-lg">02.</span>
-          Things I've Built
-          <div className="h-[1px] flex-grow bg-muted" />
-        </h2>
+    <section id="projects" className="w-full py-24 px-8 border-b border-muted/20">
+      <div className="max-w-4xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-6">
+          <h2 
+            data-aos="fade-right" 
+            className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-4 flex-grow"
+          >
+            <span className="text-silver font-mono text-lg">03.</span>
+            Things I&apos;ve Built
+            <div className="h-[1px] flex-grow bg-muted" />
+          </h2>
 
-        <div className="flex items-center gap-1 p-1 bg-muted/20 border border-muted/30 rounded-lg self-start">
-          <button 
-            onClick={() => setView('grid')}
-            className={cn(
-              "p-2 rounded transition-all duration-200",
-              view === 'grid' ? "bg-muted text-silver shadow-lg" : "text-muted-foreground hover:text-foreground"
-            )}
-            title="Grid View"
-          >
-            <LayoutGrid className="w-4 h-4" />
-          </button>
-          <button 
-            onClick={() => setView('list')}
-            className={cn(
-              "p-2 rounded transition-all duration-200",
-              view === 'grid' ? "text-muted-foreground hover:text-foreground" : "bg-muted text-silver shadow-lg"
-            )}
-            title="List View"
-          >
-            <List className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-1 p-1 bg-muted/20 border border-muted/30 rounded-lg self-start">
+            <button 
+              onClick={() => setView('grid')}
+              className={cn(
+                "p-2 rounded transition-all duration-200",
+                view === 'grid' ? "bg-muted text-silver shadow-lg" : "text-muted-foreground hover:text-foreground"
+              )}
+              title="Grid View"
+            >
+              <LayoutGrid className="w-4 h-4" />
+            </button>
+            <button 
+              onClick={() => setView('list')}
+              className={cn(
+                "p-2 rounded transition-all duration-200",
+                view === 'grid' ? "text-muted-foreground hover:text-foreground" : "bg-muted text-silver shadow-lg"
+              )}
+              title="List View"
+            >
+              <List className="w-4 h-4" />
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div className={cn(
-        "transition-all duration-500",
-        view === 'grid' 
-          ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
-          : "flex flex-col border border-muted/20 rounded-xl overflow-hidden"
-      )}>
-        {PROJECTS.map((project, i) => (
-          <ProjectCard key={i} project={project} index={i} view={view} />
-        ))}
+        <div className={cn(
+          "transition-all duration-500",
+          view === 'grid' 
+            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
+            : "flex flex-col border border-muted/20 rounded-xl overflow-hidden"
+        )}>
+          {PROJECTS.map((project, i) => (
+            <ProjectCard key={i} project={project} index={i} view={view} />
+          ))}
+        </div>
       </div>
     </section>
   );

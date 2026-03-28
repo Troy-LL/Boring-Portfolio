@@ -144,3 +144,22 @@ export const PROJECTS: Project[] = [
     website: "https://studentmapping.netlify.app/",
   },
 ];
+
+export const TECH_STACK = [
+  {
+    category: "Front-End",
+    items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "GSAP", "Vanilla JS", "HTML/CSS"]
+  },
+  {
+    category: "Back-End",
+    items: ["Node.js", "Python", "Flask", "Socket.IO", "Prisma", "PostgreSQL", "REST APIs"]
+  },
+  {
+    category: "AI/ML Research",
+    items: ["PyTorch", "GGUF", "RWKV", "MediaPipe", "OpenCV", "Transformers"]
+  },
+  {
+    category: "Infrastructure",
+    items: ["AWS", "Git", "Docker", "Stellar SDK", "Solidity", "Linux Ops"]
+  }
+];
