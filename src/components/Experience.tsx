@@ -1,0 +1,80 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { DateTime } from 'luxon';
+import { EXPERIENCE } from '@/lib/data';
+
+const ExperienceCard = ({ exp, index }: { exp: typeof EXPERIENCE[0], index: number }) => {
+  const [duration, setDuration] = useState('');
+
+  useEffect(() => {
+    const start = DateTime.fromISO(exp.startDate);
+    const now = DateTime.now();
+    const diff = now.diff(start, ['years', 'months']).toObject();
+    
+    let durStr = '';
+    if (diff.years && diff.years > 0) durStr += `${Math.floor(diff.years)} yr${diff.years > 1 ? 's' : ''} `;
+    if (diff.months && diff.months > 0) durStr += `${Math.ceil(diff.months)} mo${diff.months > 1 ? 's' : ''}`;
+    
+    setDuration(durStr || 'Just started');
+  }, [exp.startDate]);
+
+  return (
+    <div 
+      data-aos="fade-up" 
+      data-aos-delay={index * 100}
+      className="group relative pl-8 pb-12 border-l border-muted last:pb-0"
+    >
+      {/* Timeline Dot */}
+      <div className="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full bg-muted border border-background transition-colors group-hover:bg-silver" />
+      
+      <div className="flex flex-col space-y-2">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h3 className="text-xl font-bold text-foreground">{exp.role}</h3>
+          <span className="text-sm font-mono text-gray-cool">{exp.period}</span>
+        </div>
+        
+        <div className="flex items-center gap-2 text-sm text-silver font-medium lowercase italic">
+          <span>{exp.company}</span>
+          <span className="text-muted-foreground">•</span>
+          <span className="text-muted-foreground not-italic">{duration}</span>
+        </div>
+
+        <p className="text-muted-foreground leading-relaxed pt-2">
+          {exp.description}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default function Experience() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-out-quart',
+    });
+  }, []);
+
+  return (
+    <section id="experience" className="w-full max-w-4xl mx-auto py-24 px-8">
+      <h2 
+        data-aos="fade-right" 
+        className="text-3xl font-bold tracking-tight text-foreground mb-16 flex items-center gap-4"
+      >
+        <span className="text-silver font-mono text-lg">01.</span>
+        Experience
+        <div className="h-[1px] flex-grow bg-muted" />
+      </h2>
+
+      <div className="flex flex-col">
+        {EXPERIENCE.map((exp, i) => (
+          <ExperienceCard key={i} exp={exp} index={i} />
+        ))}
+      </div>
+    </section>
+  );
+}
