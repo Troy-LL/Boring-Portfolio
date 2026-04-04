@@ -114,7 +114,6 @@ export const PROJECTS: Project[] = [
     description: "A decentralized pledge and contribution platform. Built in under 2 hours as a hackathon speedrun during the Stellar Bootcamp, demonstrating rapid Web3 integration.",
     tech: ["TypeScript", "Stellar SDK", "Blockchain", "Speedrun"],
     github: "https://github.com/Troy-LL/PledgeRun",
-    website: "https://my-stellarproject.vercel.app/",
   },
   {
     title: "accordion-kinetic",
