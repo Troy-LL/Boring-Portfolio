@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import { DateTime } from 'luxon';
 import { EXPERIENCE } from '@/lib/data';
 
@@ -52,14 +50,6 @@ const ExperienceCard = ({ exp, index }: { exp: typeof EXPERIENCE[0], index: numb
 
 export default function Experience() {
   const [showAll, setShowAll] = useState(false);
-
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-      easing: 'ease-out-quart',
-    });
-  }, []);
 
   const visibleExperience = showAll ? EXPERIENCE : EXPERIENCE.slice(0, 3);
 

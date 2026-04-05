@@ -8,9 +8,8 @@ import Folder from 'lucide-react/dist/esm/icons/folder';
 import LayoutGrid from 'lucide-react/dist/esm/icons/layout-grid';
 import List from 'lucide-react/dist/esm/icons/list';
 import { cn } from '@/lib/utils';
-import AOS from 'aos';
 
-const ProjectCard = ({ project, index, view }: { project: typeof PROJECTS[0], index: number, view: 'grid' | 'list' }) => {
+const ProjectCard = ({ project, index, view, disableAOS }: { project: typeof PROJECTS[0], index: number, view: 'grid' | 'list', disableAOS: boolean }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (view === 'list') {
@@ -89,8 +88,8 @@ const ProjectCard = ({ project, index, view }: { project: typeof PROJECTS[0], in
 
   return (
     <div 
-      data-aos="fade-up" 
-      data-aos-delay={index * 100}
+      data-aos={disableAOS ? undefined : "fade-up"}
+      data-aos-delay={disableAOS ? undefined : index * 100}
       className="group bg-muted/10 border border-muted/30 p-8 rounded-lg hover:-translate-y-2 transition-all duration-300 hover:border-silver/30 flex flex-col h-full"
     >
       <div className="flex justify-between items-start mb-6">
@@ -132,21 +131,25 @@ const ProjectCard = ({ project, index, view }: { project: typeof PROJECTS[0], in
 
 export default function Projects() {
   const [view, setView] = useState<'grid' | 'list'>('grid');
+  const [hasToggled, setHasToggled] = useState(false);
 
   useEffect(() => {
     // Default to list view on mobile for better readability
     const isMobile = window.innerWidth < 768;
     if (isMobile) setView('list');
-    
-    AOS.refresh();
   }, [view]);
+
+  const handleSetView = (newView: 'grid' | 'list') => {
+    setView(newView);
+    setHasToggled(true);
+  };
 
   return (
     <section id="projects" className="w-full py-24 px-8 border-b border-muted/20">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-6">
           <h2 
-            data-aos="fade-right" 
+            data-aos={hasToggled ? undefined : "fade-right"}
             className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-4 flex-grow"
           >
             <span className="text-silver font-mono text-lg">03.</span>
@@ -156,7 +159,7 @@ export default function Projects() {
 
           <div className="flex items-center gap-1 p-1 bg-muted/20 border border-muted/30 rounded-lg self-start">
             <button 
-              onClick={() => setView('grid')}
+              onClick={() => handleSetView('grid')}
               className={cn(
                 "p-2 rounded transition-all duration-200",
                 view === 'grid' ? "bg-muted text-silver shadow-lg" : "text-muted-foreground hover:text-foreground"
@@ -166,7 +169,7 @@ export default function Projects() {
               <LayoutGrid className="w-4 h-4" />
             </button>
             <button 
-              onClick={() => setView('list')}
+              onClick={() => handleSetView('list')}
               className={cn(
                 "p-2 rounded transition-all duration-200",
                 view === 'grid' ? "text-muted-foreground hover:text-foreground" : "bg-muted text-silver shadow-lg"
@@ -185,7 +188,7 @@ export default function Projects() {
             : "flex flex-col border border-muted/20 rounded-xl overflow-hidden"
         )}>
           {PROJECTS.map((project, i) => (
-            <ProjectCard key={i} project={project} index={i} view={view} />
+            <ProjectCard key={i} project={project} index={i} view={view} disableAOS={hasToggled} />
           ))}
         </div>
       </div>

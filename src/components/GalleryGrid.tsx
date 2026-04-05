@@ -2,7 +2,10 @@
 
 import { useState } from 'react';
 import { X, PlayCircle } from 'lucide-react';
-import VideoCard from './VideoCard';
+import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+const VideoCard = dynamic(() => import('./VideoCard'), { ssr: false });
 
 interface MediaItem {
   type: string;
@@ -35,10 +38,12 @@ export default function GalleryGrid({ items }: { items: MediaItem[] }) {
             {item.type === 'video' ? (
               <VideoCard src={item.src} />
             ) : (
-              <img
+              <Image
                 src={encodeURI(item.src)}
                 alt={item.title}
-                className="w-full h-full object-cover grayscale opacity-70 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
+                fill
+                sizes="(max-width: 768px) 33vw, 25vw"
+                className="object-cover grayscale opacity-70 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
                 loading="lazy"
               />
             )}
@@ -88,11 +93,15 @@ export default function GalleryGrid({ items }: { items: MediaItem[] }) {
                 playsInline
               />
             ) : (
-              <img
-                src={encodeURI(selectedItem.src)}
-                alt={selectedItem.title}
-                className="max-w-[95vw] md:max-w-5xl max-h-[80vh] rounded-lg shadow-2xl object-contain border border-muted/50"
-              />
+              <div className="relative w-[95vw] md:w-[60vw] h-[80vh]">
+                <Image
+                  src={encodeURI(selectedItem.src)}
+                  alt={selectedItem.title}
+                  fill
+                  className="rounded-lg shadow-2xl object-contain border border-muted/50"
+                  priority
+                />
+              </div>
             )}
 
             {/* Captions inside modal */}
