@@ -84,15 +84,15 @@ export const PROJECTS: Project[] = [
     github: "https://github.com/Troy-LL/AI-Compacting",
   },
   {
-    title: "Active Facial Note Taking",
-    category: "Computer Vision",
-    summary: "Hands-free note-taking utility using facial recognition and gesture mapping.",
-    description: "Real-time facial recognition system using MediaPipe and OpenCV. Integrated with a Flask-SocketIO backend and a custom UI for floating data-overlays.",
-    tech: ["MediaPipe", "OpenCV", "Flask", "SocketIO"],
-    github: "https://github.com/Troy-LL/Facial-Recognition-Side-Project",
+    title: "The Free Credential Index",
+    category: "Open-Source / Education",
+    summary: "A curated, rot-resistant library of industry-recognized free tech certifications.",
+    description: "An 'Awesome-style' repository documenting zero-cost certifications from organizations like Google, AWS, and Microsoft. Designed for long-term reliability and metadata-rich indexing.",
+    tech: ["Markdown", "GitHub Actions", "Documentation", "Open Source"],
+    github: "https://github.com/Troy-LL/The-Free-Credential-Index",
   },
   {
-    title: "skill-swipe",
+    title: "Skill Swipe",
     category: "Developer Camp Hackathon Submission",
     summary: "A full-stack project built in 3 days under intense cultural time pressure.",
     description: "Built in 3 days under intense pressure in a cross-cultural environment where language barriers existed. Tested rapid full-stack development and front-end adaptability.",
@@ -108,7 +108,7 @@ export const PROJECTS: Project[] = [
     github: "https://github.com/Troy-LL/ALAITAPTAP",
   },
   {
-    title: "Wordle-Troy-Editions",
+    title: "Wordle Troy Editions",
     category: "Web Game / Speedrun",
     summary: "Custom Wordle implementations with curated vocabularies and theme-based challenges.",
     description: "Custom Wordle implementations with curated vocabularies, theme-based challenges, and extended game mechanics. Created in <1hr as an AI-agentic coding test.",
@@ -117,32 +117,24 @@ export const PROJECTS: Project[] = [
     website: "https://wordleer.netlify.app/",
   },
   {
-    title: "accordion-kinetic",
+    title: "Kinetic Music",
     category: "Hardware-Integrated UI",
     summary: "A physically-responsive accordion leveraging phone hardware sensors.",
     description: "An interactive accordion that leverages on-board hardware (accelerometer and gyroscope) to create a physically-responsive, kinetic UI/UX.",
     tech: ["JavaScript", "Device Orientation API", "GSAP", "Hardware UI"],
-    github: "https://github.com/Troy-LL/accordion-kinetic",
+    github: "https://github.com/Troy-LL/Kinetic-Music",
     website: "https://accordion-kinetic.vercel.app/",
   },
   {
-    title: "flavor-mapping-app",
+    title: "Flavor Mapping",
     category: "Data-Driven Gastronomy",
     summary: "A data visualization tool for discovering ingredient pairings across cuisines.",
     description: "A data-driven flavor exploration tool helping users discover ingredient pairings and profile mapping across various cuisines.",
     tech: ["TypeScript", "Data Mapping", "React", "Gastronomy AI"],
-    github: "https://github.com/Troy-LL/flavor-mapping-app",
+    github: "https://github.com/Troy-LL/Flavor-Mapping",
     website: "https://flavormapping.netlify.app/",
   },
-  {
-    title: "student-memory-map",
-    category: "Cognitive Visualization",
-    summary: "A cognitive mapping tool designed to improve long-term information retention.",
-    description: "A cognitive visualization tool designed to help students map information hierarchies and improve long-term retention.",
-    tech: ["TypeScript", "Canvas API", "Data Structures", "EdTech"],
-    github: "https://github.com/Troy-LL/student-memory-map",
-    website: "https://studentmapping.netlify.app/",
-  },
+
 ];
 
 export const TECH_STACK = [
@@ -160,6 +152,6 @@ export const TECH_STACK = [
   },
   {
     category: "Infrastructure",
-    items: ["AWS", "Git", "Docker", "Stellar SDK", "Solidity", "Linux Ops"]
+    items: ["AWS", "Git", "GitHub Actions", "Docker", "Stellar SDK", "Solidity"]
   }
 ];
