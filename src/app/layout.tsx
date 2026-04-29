@@ -7,10 +7,6 @@ import AOSProvider from "@/components/AOSProvider";
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: {
-    default: "Portfolio",
-    template: "TL | %s",
-  },
   description: "Official portfolio of Troy Lauren T. Lazaro. IT Student at PUP, AI/ML Researcher, and Community Leader. Focused on building with intention. Life is too short to be boring.",
   keywords: ["Troy Lazaro", "AI Researcher", "IT Student", "PUP Manila", "Full Stack Developer", "Boring Portfolio"],
   authors: [{ name: "Troy Lauren T. Lazaro" }],
