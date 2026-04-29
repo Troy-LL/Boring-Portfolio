@@ -3,6 +3,10 @@ import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 
+export const metadata = {
+  title: "Portfolio",
+};
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground flex flex-col items-center selection:bg-accent selection:text-foreground scroll-smooth">

@@ -140,7 +140,7 @@ const GALLERY_MEDIA = [
 ];
 
 export const metadata = {
-  title: 'Gallery | Troy Lauren T. Lazaro',
+  title: 'Gallery',
   description: 'Community events, speaking engagements, and behind the scenes.',
 };
 
