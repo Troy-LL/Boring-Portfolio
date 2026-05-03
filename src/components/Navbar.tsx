@@ -94,7 +94,7 @@ export default function Navbar() {
         {/* Action Button (Mobile Menu could be here, but let's keep it minimal for now) */}
         <div className="flex items-center space-x-4">
           <a 
-            href="/resume.pdf?v=2026-04" 
+            href="/resume.pdf" 
             target="_blank"
             className="text-xs font-bold uppercase tracking-widest px-4 py-2 rounded border border-muted hover:bg-muted/50 transition-all"
           >
