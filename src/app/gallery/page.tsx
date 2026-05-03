@@ -173,6 +173,3 @@ export default function GalleryPage() {
     </main>
   );
 }
-/main>
-  );
-}
