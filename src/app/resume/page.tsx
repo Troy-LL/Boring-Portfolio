@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ArrowLeft, Download } from 'lucide-react';
+import ResumeEmbed from '@/components/ResumeEmbed';
 
 export const metadata = {
   title: 'TL | Resume',
@@ -34,14 +35,9 @@ export default function ResumePage() {
           </a>
         </div>
 
-        {/* Resume Embed */}
-        <div className="flex-grow w-full bg-muted/20 rounded-xl overflow-hidden border border-muted animate-in fade-in slide-in-from-bottom-12 duration-1000 min-h-[75vh]">
-          <iframe 
-            src="https://docs.google.com/document/d/1yyjqeEqSVWKLruBkglLBhCLlDdN5OXuWYwKMfIwDzOc/preview" 
-            className="w-full h-full border-0 min-h-[75vh]"
-            title="Resume"
-            allowFullScreen
-          />
+        {/* Resume Embed — scaled on narrow viewports to preserve doc layout */}
+        <div className="flex-grow w-full bg-muted/20 rounded-xl overflow-hidden border border-muted animate-in fade-in slide-in-from-bottom-12 duration-1000 min-h-[75vh] py-4 px-2 sm:px-4">
+          <ResumeEmbed className="min-h-[calc(75vh-2rem)]" />
         </div>
       </div>
     </main>
