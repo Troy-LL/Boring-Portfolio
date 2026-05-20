@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import AOSProvider from "@/components/AOSProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 
@@ -26,10 +25,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="antialiased font-sans">
-        <AOSProvider>
-          <Navbar />
-          {children}
-        </AOSProvider>
+        <Navbar />
+        {children}
       </body>
     </html>
   );

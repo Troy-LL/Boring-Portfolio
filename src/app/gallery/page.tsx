@@ -157,7 +157,7 @@ export default function GalleryPage() {
         </Link>
 
         {/* Header */}
-        <div className="mb-16 animate-in fade-in slide-in-from-bottom-8 duration-700">
+        <div className="mb-16">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground leading-[1.1] mb-6">
             Moments & <span className="text-gray-cool">Memories.</span>
           </h1>

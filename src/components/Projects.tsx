@@ -9,7 +9,7 @@ import LayoutGrid from 'lucide-react/dist/esm/icons/layout-grid';
 import List from 'lucide-react/dist/esm/icons/list';
 import { cn } from '@/lib/utils';
 
-const ProjectCard = ({ project, index, view, disableAOS }: { project: typeof PROJECTS[0], index: number, view: 'grid' | 'list', disableAOS: boolean }) => {
+const ProjectCard = ({ project, view }: { project: typeof PROJECTS[0], view: 'grid' | 'list' }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (view === 'list') {
@@ -66,7 +66,7 @@ const ProjectCard = ({ project, index, view, disableAOS }: { project: typeof PRO
 
         {/* Expanded Content */}
         {isExpanded && (
-          <div className="mt-6 pt-6 border-t border-muted/10 animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="mt-6 pt-6 border-t border-muted/10">
             <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-3xl">
               {project.description}
             </p>
@@ -88,8 +88,6 @@ const ProjectCard = ({ project, index, view, disableAOS }: { project: typeof PRO
 
   return (
     <div 
-      data-aos={disableAOS ? undefined : "fade-up"}
-      data-aos-delay={disableAOS ? undefined : index * 100}
       className="group bg-muted/10 border border-muted/30 p-8 rounded-lg hover:-translate-y-2 transition-all duration-300 hover:border-silver/30 flex flex-col h-full"
     >
       <div className="flex justify-between items-start mb-6">
@@ -131,7 +129,6 @@ const ProjectCard = ({ project, index, view, disableAOS }: { project: typeof PRO
 
 export default function Projects() {
   const [view, setView] = useState<'grid' | 'list'>('grid');
-  const [hasToggled, setHasToggled] = useState(false);
 
   useEffect(() => {
     // Default to list view on mobile for better readability
@@ -139,19 +136,11 @@ export default function Projects() {
     if (isMobile) setView('list');
   }, [view]);
 
-  const handleSetView = (newView: 'grid' | 'list') => {
-    setView(newView);
-    setHasToggled(true);
-  };
-
   return (
     <section id="projects" className="w-full py-24 px-8 border-b border-muted/20">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-6">
-          <h2 
-            data-aos={hasToggled ? undefined : "fade-right"}
-            className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-4 flex-grow"
-          >
+          <h2 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-4 flex-grow">
             <span className="text-silver font-mono text-lg">03.</span>
             Things I&apos;ve Built
             <div className="h-[1px] flex-grow bg-muted" />
@@ -159,7 +148,7 @@ export default function Projects() {
 
           <div className="flex items-center gap-1 p-1 bg-muted/20 border border-muted/30 rounded-lg self-start">
             <button 
-              onClick={() => handleSetView('grid')}
+              onClick={() => setView('grid')}
               className={cn(
                 "p-2 rounded transition-all duration-200",
                 view === 'grid' ? "bg-muted text-silver shadow-lg" : "text-muted-foreground hover:text-foreground"
@@ -169,7 +158,7 @@ export default function Projects() {
               <LayoutGrid className="w-4 h-4" />
             </button>
             <button 
-              onClick={() => handleSetView('list')}
+              onClick={() => setView('list')}
               className={cn(
                 "p-2 rounded transition-all duration-200",
                 view === 'grid' ? "text-muted-foreground hover:text-foreground" : "bg-muted text-silver shadow-lg"
@@ -188,7 +177,7 @@ export default function Projects() {
             : "flex flex-col border border-muted/20 rounded-xl overflow-hidden"
         )}>
           {PROJECTS.map((project, i) => (
-            <ProjectCard key={i} project={project} index={i} view={view} disableAOS={hasToggled} />
+            <ProjectCard key={i} project={project} view={view} />
           ))}
         </div>
       </div>

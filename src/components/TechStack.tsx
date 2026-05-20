@@ -18,10 +18,7 @@ export default function TechStack() {
     <section id="tech-stack" className="py-24 px-8 w-full border-b border-muted/20">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-6">
-          <h2 
-            data-aos="fade-right" 
-            className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-4 flex-grow"
-          >
+          <h2 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-4 flex-grow">
             <span className="text-silver font-mono text-lg">02.</span>
             Tech Arsenal
             <div className="h-[1px] flex-grow bg-muted" />
@@ -42,10 +39,8 @@ export default function TechStack() {
           {(showAll ? TECH_STACK : primaryCategories).map((category, idx) => (
             <div 
               key={idx} 
-              data-aos="fade-up" 
-              data-aos-delay={idx * 50}
               className={cn(
-                "space-y-8 animate-in fade-in slide-in-from-top-4 duration-500",
+                "space-y-8",
                 showAll && (category.category === "AI/ML Research" || category.category === "Infrastructure") ? "md:min-h-[200px]" : ""
               )}
             >

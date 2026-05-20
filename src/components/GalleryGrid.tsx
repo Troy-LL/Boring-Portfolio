@@ -26,7 +26,7 @@ export default function GalleryGrid({ items }: { items: MediaItem[] }) {
   return (
     <>
       {/* Gallery Dense Grid (Maintains emphasis sizes) */}
-      <div className="grid grid-cols-3 grid-flow-row-dense auto-rows-[100px] sm:auto-rows-[150px] md:auto-rows-[250px] gap-3 md:gap-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-150 fill-mode-both">
+      <div className="grid grid-cols-3 grid-flow-row-dense auto-rows-[100px] sm:auto-rows-[150px] md:auto-rows-[250px] gap-3 md:gap-6">
         {items.map((item, i) => (
           <div 
             key={i} 
@@ -65,7 +65,7 @@ export default function GalleryGrid({ items }: { items: MediaItem[] }) {
       {/* Fullscreen Lightbox Modal */}
       {selectedItem && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 backdrop-blur-md p-4 md:p-12 animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 backdrop-blur-md p-4 md:p-12"
           onClick={() => setSelectedItem(null)}
           onKeyDown={handleKeyDown}
           tabIndex={0}
@@ -81,7 +81,7 @@ export default function GalleryGrid({ items }: { items: MediaItem[] }) {
 
           {/* Modal Content container */}
           <div 
-            className="relative w-full max-h-full flex flex-col items-center justify-center animate-in zoom-in-95 duration-300 overflow-hidden"
+            className="relative w-full max-h-full flex flex-col items-center justify-center overflow-hidden"
             onClick={(e) => e.stopPropagation()} // Prevent click from closing when clicking on media
           >
             {selectedItem.type === 'video' ? (

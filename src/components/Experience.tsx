@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import { EXPERIENCE } from '@/lib/data';
 
-const ExperienceCard = ({ exp, index }: { exp: typeof EXPERIENCE[0], index: number }) => {
+const ExperienceCard = ({ exp }: { exp: typeof EXPERIENCE[0] }) => {
   const [duration, setDuration] = useState('');
 
   useEffect(() => {
@@ -20,11 +20,7 @@ const ExperienceCard = ({ exp, index }: { exp: typeof EXPERIENCE[0], index: numb
   }, [exp.startDate]);
 
   return (
-    <div 
-      data-aos="fade-up" 
-      data-aos-delay={index * 100}
-      className="group relative pl-8 pb-12 border-l border-muted last:pb-0"
-    >
+    <div className="group relative pl-8 pb-12 border-l border-muted last:pb-0">
       {/* Timeline Dot */}
       <div className="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full bg-muted border border-background transition-colors group-hover:bg-silver" />
       
@@ -57,10 +53,7 @@ export default function Experience() {
     <section id="experience" className="py-24 px-8 w-full border-b border-muted/20">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-6">
-          <h2 
-            data-aos="fade-right" 
-            className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-4 flex-grow"
-          >
+          <h2 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-4 flex-grow">
             <span className="text-silver font-mono text-lg">01.</span>
             Experience
             <div className="h-[1px] flex-grow bg-muted" />
@@ -69,7 +62,7 @@ export default function Experience() {
 
         <div className="flex flex-col relative">
           {visibleExperience.map((exp, i) => (
-            <ExperienceCard key={i} exp={exp} index={i} />
+            <ExperienceCard key={i} exp={exp} />
           ))}
 
           {!showAll && EXPERIENCE.length > 3 && (

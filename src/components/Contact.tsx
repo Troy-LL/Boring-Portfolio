@@ -150,7 +150,7 @@ export default function Contact() {
                     </p>
                     {link.isCopy && (
                       <div className="transition-all duration-300 text-silver/60 flex-shrink-0">
-                        {copied ? <Check size={12} className="text-green-500 animate-in zoom-in" /> : <Copy size={10} className="md:w-3 md:h-3 opacity-0 group-hover:opacity-100" />}
+                        {copied ? <Check size={12} className="text-green-500" /> : <Copy size={10} className="md:w-3 md:h-3 opacity-0 group-hover:opacity-100" />}
                       </div>
                     )}
                   </div>
@@ -176,7 +176,7 @@ export default function Contact() {
             <h3 className="text-xl font-bold mb-8 text-foreground">Let&apos;s Connect!</h3>
             
             {isSuccess ? (
-              <div className="py-12 flex flex-col items-center space-y-4 animate-in fade-in zoom-in duration-500">
+              <div className="py-12 flex flex-col items-center space-y-4">
                 <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center text-green-500">
                   <Check size={32} />
                 </div>
