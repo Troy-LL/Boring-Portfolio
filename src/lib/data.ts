@@ -21,6 +21,13 @@ export const EXPERIENCE = [
     description: "Leading outreach to students and alumni, coordinating speakers, and collaborating with marketing teams to increase program visibility.",
   },
   {
+    company: "AWS User Group e:Novators Philippines",
+    role: "Start-Up Development Office – Committee Member",
+    period: "Apr 2026 – Present",
+    startDate: "2026-04-01",
+    description: "Supporting start-up development initiatives that foster innovation and collaboration. Helping organize programs for aspiring entrepreneurs and building a vibrant environment for networking and knowledge sharing among start-ups.",
+  },
+  {
     company: "Microsoft Student Community – PUP",
     role: "Executive Secretary, Leadership Development",
     period: "2025 – Present",
