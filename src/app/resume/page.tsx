@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { ArrowLeft, Download } from 'lucide-react';
+import ArrowLeft from 'lucide-react/dist/esm/icons/arrow-left';
+import Download from 'lucide-react/dist/esm/icons/download';
 import ResumeEmbed from '@/components/ResumeEmbed';
 
 export const metadata = {

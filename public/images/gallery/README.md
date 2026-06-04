@@ -1,8 +1,11 @@
-# Gallery Images Directory
+# Gallery media
 
-Place your gallery photos in this directory! 
+Place gallery photos (`.webp`) and videos (`.webm`) in this directory.
 
-For the best experience:
-1. Try to compress your images first (e.g., using TinyPNG or Squoosh) so they load fast.
-2. In your `src/app/gallery/page.tsx`, you can update the `GALLERY_IMAGES` array to point to the images you put here.
-3. Example path inside your React component: `src="/images/gallery/my-cool-photo.jpg"`
+## Before deploy
+
+1. **Images:** Run `npm run optimize-gallery` from the project root to audit sizes and recompress `.webp` files in place (uses `sharp`).
+2. **Videos:** Re-encode large `.webm` files with [HandBrake](https://handbrake.fr/) or ffmpeg if load times are slow.
+3. **Manual option:** [Squoosh](https://squoosh.app/) or TinyPNG work too if you prefer a GUI.
+
+Update paths in `src/app/gallery/page.tsx` when adding or renaming files.

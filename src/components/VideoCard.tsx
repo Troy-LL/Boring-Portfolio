@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { Volume2, VolumeX } from 'lucide-react';
+import Volume2 from 'lucide-react/dist/esm/icons/volume-2';
+import VolumeX from 'lucide-react/dist/esm/icons/volume-x';
 
 export default function VideoCard({ src }: { src: string }) {
   const [isMuted, setIsMuted] = useState(true);

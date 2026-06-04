@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { X, PlayCircle } from 'lucide-react';
+import X from 'lucide-react/dist/esm/icons/x';
+import PlayCircle from 'lucide-react/dist/esm/icons/play-circle';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
