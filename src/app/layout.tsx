@@ -1,21 +1,36 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+import { boska, gambetta, switzer } from "./fonts";
 import Navbar from "@/components/Navbar";
-
-const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
+import DoorProvider from "@/components/DoorProvider";
 
 export const metadata: Metadata = {
-  description: "Official portfolio of Troy Lauren T. Lazaro. IT Student at PUP, AI/ML Researcher, and Community Leader. Focused on building with intention. Life is too short to be boring.",
-  keywords: ["Troy Lazaro", "AI Researcher", "IT Student", "PUP Manila", "Full Stack Developer", "Boring Portfolio"],
-  authors: [{ name: "Troy Lauren T. Lazaro" }],
+  title: "Troy Lazaro",
+  description: "I make things. I care how they look and how they work.",
+  keywords: ["Troy Lazaro", "troylazaro.dev"],
+  authors: [{ name: "Troy Lazaro" }],
   openGraph: {
-    title: "TL | Portfolio",
-    description: "IT Student, AI/ML Researcher & Community Leader. Life is too short to be boring.",
+    title: "Troy Lazaro",
+    description: "I make things. I care how they look and how they work.",
     type: "website",
     locale: "en_PH",
-  }
+  },
 };
+
+const roomBoot = `
+(function () {
+  try {
+    if (
+      location.pathname !== "/" ||
+      location.hash ||
+      sessionStorage.getItem("troy-door") === "entered"
+    ) {
+      document.documentElement.dataset.room = "open";
+    }
+  } catch (e) {}
+})();
+`;
 
 export default function RootLayout({
   children,
@@ -23,10 +38,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="antialiased font-sans">
-        <Navbar />
-        {children}
+    <html
+      lang="en"
+      className={`${boska.variable} ${gambetta.variable} ${switzer.variable}`}
+    >
+      <body className="antialiased">
+        <Script id="room-boot" strategy="beforeInteractive">
+          {roomBoot}
+        </Script>
+        <noscript>
+          <style>{`[data-door]{display:none!important} nav{visibility:visible!important;pointer-events:auto!important}`}</style>
+        </noscript>
+        <DoorProvider>
+          <Navbar />
+          {children}
+        </DoorProvider>
       </body>
     </html>
   );

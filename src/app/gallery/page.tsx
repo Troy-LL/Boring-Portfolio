@@ -140,7 +140,7 @@ const GALLERY_MEDIA = [
 ];
 
 export const metadata = {
-  title: 'TL | Gallery',
+  title: 'Gallery — Troy Lazaro',
   description: 'Community events, speaking engagements, and behind the scenes.',
 };
 

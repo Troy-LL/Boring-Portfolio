@@ -1,22 +1,42 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 15 15 15;
-    --foreground: 250 250 250;
-    --muted: 28 28 28;
-    --muted-foreground: 142 142 147;
-    --accent: 192 192 192;
-    --accent-foreground: 15 15 15;
+    --background: 242 238 232;
+    --foreground: 20 18 16;
+    --muted: 41 38 35;
+    --muted-foreground: 92 87 82;
+    --accent: 201 163 106;
+    --accent-foreground: 20 18 16;
+    --paper: #f2eee8;
+    --ink: #141210;
+    --warm-black: #191512;
+    --charcoal: #292623;
+    --amber: #c9a36a;
   }
-}
 
-body {
-  @apply bg-background text-foreground;
-  font-feature-settings: "rlig" 1, "calt" 1;
+  html {
+    background: var(--paper);
+  }
+
+  body {
+    @apply bg-background text-foreground font-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  nav,
+  button,
+  [type="button"],
+  [type="submit"] {
+    font-family: var(--font-switzer), sans-serif;
+  }
+
+  ::selection {
+    background: #e8dcc4;
+    color: var(--ink);
+  }
 }
 
 /* Seamless Scrollbar */
@@ -25,20 +45,187 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-background;
+  background: var(--paper);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #121212; 
-  border: 3px solid #0F0F0F;
+  background: #d9d3c8;
+  border: 3px solid var(--paper);
   border-radius: 100px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #1A1A1A;
+  background: #c9c2b4;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #121212 #0F0F0F;
+  scrollbar-color: #d9d3c8 #f2eee8;
+}
+
+html:not([data-room="open"]) [data-door] {
+  display: flex;
+}
+
+html[data-room="open"] [data-door] {
+  display: none;
+}
+
+html:not([data-room="open"]) nav {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Digital door — paper card on a warm-black field */
+.door {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--warm-black);
+}
+
+.door-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.door-scene {
+  perspective: 1400px;
+}
+
+.door-card {
+  position: relative;
+  width: min(88vw, 26.25rem);
+  aspect-ratio: 3.5 / 2;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transform: rotateX(-1.4deg) rotateY(2.2deg);
+  animation: door-float 8s ease-in-out infinite;
+  transition: transform 180ms ease;
+}
+
+.door-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.75rem 2rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 42%),
+    var(--paper);
+  color: var(--ink);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 1px 0 rgba(20, 18, 16, 0.06),
+    0 18px 40px rgba(0, 0, 0, 0.28),
+    0 4px 10px rgba(0, 0, 0, 0.18);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.door-face-front {
+  gap: 0.85rem;
+}
+
+.door-face-back {
+  transform: rotateY(180deg);
+  justify-content: center;
+}
+
+.door-name {
+  font-family: var(--font-boska), serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.35rem, 8vw, 3.65rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.door-line {
+  max-width: 18rem;
+  font-family: var(--font-gambetta), serif;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #3d3934;
+}
+
+.door-motto {
+  font-family: var(--font-gambetta), serif;
+  font-size: clamp(1.15rem, 3vw, 1.45rem);
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.door-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-family: var(--font-switzer), sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  color: #f2eee8;
+}
+
+.door-url {
+  opacity: 0.55;
+  letter-spacing: 0.16em;
+}
+
+.door.is-leaving {
+  pointer-events: none;
+  animation: door-fade 720ms ease forwards;
+}
+
+.door.is-leaving .door-card {
+  animation: door-flip 720ms ease forwards;
+}
+
+@keyframes door-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -7px;
+  }
+}
+
+@keyframes door-flip {
+  0% {
+    transform: rotateX(-1.4deg) rotateY(2.2deg);
+  }
+  55% {
+    transform: rotateX(2deg) rotateY(188deg);
+  }
+  100% {
+    transform: rotateX(6deg) rotateY(196deg) translateY(-12px);
+    opacity: 0.2;
+  }
+}
+
+@keyframes door-fade {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .door-card,
+  .door.is-leaving,
+  .door.is-leaving .door-card {
+    animation: none;
+  }
 }

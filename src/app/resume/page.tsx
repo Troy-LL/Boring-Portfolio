@@ -4,7 +4,7 @@ import Download from 'lucide-react/dist/esm/icons/download';
 import ResumeEmbed from '@/components/ResumeEmbed';
 
 export const metadata = {
-  title: 'TL | Resume',
+  title: 'Resume — Troy Lazaro',
   description: 'View my professional resume.',
 };
 

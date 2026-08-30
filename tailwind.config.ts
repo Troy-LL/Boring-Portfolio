@@ -9,28 +9,31 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0F0F0F", // Ink Black
-        foreground: "#FAFAFA", // Paper White
+        background: "#F2EEE8",
+        foreground: "#141210",
         muted: {
-          DEFAULT: "#1C1C1C", // Obsidian
-          foreground: "#8E8E93", // Cool Gray
+          DEFAULT: "#292623",
+          foreground: "#5C5752",
         },
         accent: {
-          DEFAULT: "#C0C0C0", // Silver
-          foreground: "#0F0F0F",
+          DEFAULT: "#C9A36A",
+          foreground: "#141210",
         },
-        ink: "#0F0F0F",
-        obsidian: "#1C1C1C",
+        ink: "#141210",
+        obsidian: "#292623",
         gray: {
-          cool: "#8E8E93",
+          cool: "#5C5752",
         },
-        silver: "#C0C0C0",
+        silver: "#292623",
         white: {
-          paper: "#FAFAFA",
+          paper: "#141210",
         },
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ["var(--font-switzer)", "sans-serif"],
+        serif: ["var(--font-gambetta)", "serif"],
+        display: ["var(--font-boska)", "serif"],
+        ui: ["var(--font-switzer)", "sans-serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -270,7 +270,7 @@ export default function Contact() {
             href="https://tlportfoliocreative.vercel.app/" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="group flex items-center gap-1 text-silver/60 hover:text-white transition-colors duration-300 cursor-pointer"
+            className="group flex items-center gap-1 text-silver/60 hover:text-foreground transition-colors duration-300 cursor-pointer"
             title="Switch to Creative Portfolio"
           >
             <span>Life is too short to be boring.</span>
