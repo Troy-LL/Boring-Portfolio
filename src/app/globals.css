@@ -1,44 +1,130 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Boska";
+  src: url("/fonts/Boska-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Boska";
+  src: url("/fonts/Boska-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gambetta";
+  src: url("/fonts/Gambetta-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gambetta";
+  src: url("/fonts/Gambetta-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gambetta";
+  src: url("/fonts/Gambetta-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Switzer";
+  src: url("/fonts/Switzer-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Switzer";
+  src: url("/fonts/Switzer-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
-    --background: 15 15 15;
-    --foreground: 250 250 250;
-    --muted: 28 28 28;
-    --muted-foreground: 142 142 147;
-    --accent: 192 192 192;
-    --accent-foreground: 15 15 15;
+    --paper: #f2eee8;
+    --ink: #141210;
+    --warm-black: #191512;
+    --charcoal: #292623;
+    --amber: #c9a36a;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink antialiased;
+    font-family: "Gambetta", Georgia, serif;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--amber) 45%, transparent);
+    color: var(--ink);
   }
 }
 
-body {
-  @apply bg-background text-foreground;
-  font-feature-settings: "rlig" 1, "calt" 1;
+@layer utilities {
+  .font-display {
+    font-family: "Boska", Georgia, serif;
+  }
+
+  .font-ui {
+    font-family: "Switzer", system-ui, sans-serif;
+  }
+
+  .font-body {
+    font-family: "Gambetta", Georgia, serif;
+  }
 }
 
-/* Seamless Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-background;
+  background: var(--paper);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #121212; 
-  border: 3px solid #0F0F0F;
+  background: #d8d2c8;
+  border: 3px solid var(--paper);
   border-radius: 100px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #1A1A1A;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #121212 #0F0F0F;
+  scrollbar-color: #d8d2c8 var(--paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

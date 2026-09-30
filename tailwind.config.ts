@@ -9,33 +9,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0F0F0F", // Ink Black
-        foreground: "#FAFAFA", // Paper White
-        muted: {
-          DEFAULT: "#1C1C1C", // Obsidian
-          foreground: "#8E8E93", // Cool Gray
-        },
-        accent: {
-          DEFAULT: "#C0C0C0", // Silver
-          foreground: "#0F0F0F",
-        },
-        ink: "#0F0F0F",
-        obsidian: "#1C1C1C",
-        gray: {
-          cool: "#8E8E93",
-        },
-        silver: "#C0C0C0",
-        white: {
-          paper: "#FAFAFA",
-        },
+        paper: "#F2EEE8",
+        ink: "#141210",
+        "warm-black": "#191512",
+        charcoal: "#292623",
+        amber: "#C9A36A",
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        display: ["Boska", "Georgia", "serif"],
+        body: ["Gambetta", "Georgia", "serif"],
+        ui: ["Switzer", "system-ui", "sans-serif"],
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      maxWidth: {
+        measure: "42rem",
+        page: "48rem",
       },
     },
   },

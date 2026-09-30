@@ -1,69 +1,137 @@
-import Experience from "@/components/Experience";
-import TechStack from "@/components/TechStack";
-import Projects from "@/components/Projects";
-import Contact from "@/components/Contact";
-
-export const metadata = {
-  title: "TL | Portfolio",
-};
+import Link from "next/link";
+import { getFeaturedWork } from "@/lib/work";
+import { EXPERIENCE } from "@/lib/experience";
+import { getLatestPost } from "@/lib/posts";
+import { SITE } from "@/lib/site";
 
 export default function Home() {
+  const featured = getFeaturedWork();
+  const peekRoles = EXPERIENCE.slice(0, 3);
+  const latest = getLatestPost();
+
   return (
-    <main className="min-h-screen bg-background text-foreground flex flex-col items-center selection:bg-accent selection:text-foreground scroll-smooth">
-      {/* Hero Section */}
-      <div id="home" className="min-h-screen w-full flex flex-col items-center justify-center p-8 pt-32 md:pt-16">
-        <div className="max-w-4xl mx-auto w-full flex flex-col space-y-8">
-          
-          {/* Top Badges / Subtitle */}
-          <div className="flex flex-wrap gap-3 uppercase tracking-widest text-xs font-semibold text-muted-foreground">
-            <span className="px-3 py-1 rounded-full border border-muted bg-muted/20">IT Student</span>
-            <span className="px-3 py-1 rounded-full border border-muted bg-muted/20">AI/ML Researcher</span>
-            <span className="px-3 py-1 rounded-full border border-muted bg-muted/20">Full-Stack Dev</span>
-          </div>
-
-          {/* Main Heading */}
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground leading-[1.1]">
-            Building with <span className="text-gray-cool">intention.</span><br />
-            Building with <span className="text-silver">purpose.</span>
-          </h1>
-
-          {/* Description / Motto */}
-          <p className="max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed">
-            I&apos;m <strong className="text-foreground font-semibold">Troy Lauren T. Lazaro</strong>, operating at the intersection of AI research, full-stack development, and community-driven talent growth. Life is too short to be mediocre, let&apos;s build together.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="pt-8 flex flex-wrap gap-4 items-center">
-            <a href="#projects" className="px-8 py-3 rounded-md bg-foreground text-background font-medium tracking-wide hover:bg-silver transition-colors duration-300">
-              View Projects
-            </a>
-            <a href="#contact" className="px-8 py-3 rounded-md bg-transparent border border-muted text-foreground hover:bg-muted/50 transition-colors duration-300">
-              Get in Touch
-            </a>
-          </div>
-          
+    <main className="mx-auto max-w-page px-6">
+      <section className="pt-20 pb-24 sm:pt-28 sm:pb-32">
+        <h1 className="font-display italic text-5xl sm:text-6xl md:text-7xl text-ink tracking-tight">
+          {SITE.name}
+        </h1>
+        <p className="mt-6 max-w-measure text-xl sm:text-2xl text-charcoal leading-relaxed">
+          {SITE.positioning}
+        </p>
+        <p className="mt-4 font-ui text-sm text-charcoal/80">
+          {SITE.location}. Open to conversations.
+        </p>
+        <div className="mt-10 flex flex-wrap gap-4 font-ui text-sm">
+          <Link
+            href="/work"
+            className="inline-flex items-center px-5 py-2.5 bg-ink text-paper hover:bg-warm-black transition-colors"
+          >
+            Selected work
+          </Link>
+          <Link
+            href="/talk"
+            className="inline-flex items-center px-5 py-2.5 border border-charcoal/30 text-ink hover:border-ink transition-colors"
+          >
+            Talk
+          </Link>
         </div>
-      </div>
+      </section>
 
-      {/* Experience Section */}
-      <div id="experience" className="w-full">
-        <Experience />
-      </div>
+      <section aria-labelledby="work-heading" className="pb-24 border-t border-charcoal/10 pt-16">
+        <div className="flex items-baseline justify-between gap-4 mb-10">
+          <h2 id="work-heading" className="font-ui text-sm uppercase tracking-[0.14em] text-charcoal">
+            Selected work
+          </h2>
+          <Link href="/work" className="font-ui text-sm text-charcoal hover:text-ink underline-offset-4 hover:underline">
+            All work
+          </Link>
+        </div>
+        <ul className="divide-y divide-charcoal/10 border-y border-charcoal/10">
+          {featured.map((item) => (
+            <li key={item.slug}>
+              <Link
+                href={`/work/${item.slug}`}
+                className="block py-8 group"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                  <h3 className="font-body text-2xl text-ink group-hover:text-charcoal transition-colors">
+                    {item.title}
+                  </h3>
+                  <span className="font-ui text-xs text-charcoal/70">{item.category}</span>
+                </div>
+                <p className="mt-3 max-w-measure text-charcoal leading-relaxed">
+                  {item.summary}
+                </p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      {/* Tech Arsenal Section */}
-      <div id="tech" className="w-full">
-        <TechStack />
-      </div>
+      <section aria-labelledby="about-heading" className="pb-24">
+        <h2 id="about-heading" className="font-ui text-sm uppercase tracking-[0.14em] text-charcoal mb-8">
+          About
+        </h2>
+        <p className="max-w-measure text-lg text-charcoal leading-relaxed">
+          IT student at PUP. I build tools, research compact models when the claim is earned, and help student communities grow talent. {SITE.motto}
+        </p>
+        <ul className="mt-10 space-y-5 max-w-measure">
+          {peekRoles.map((role) => (
+            <li key={`${role.company}-${role.role}`} className="border-b border-charcoal/10 pb-5">
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
+                <p className="text-ink">
+                  {role.role}
+                  <span className="text-charcoal"> · {role.company}</span>
+                </p>
+                <span className="font-ui text-xs text-charcoal/70">{role.period}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      {/* Projects Section */}
-      <div id="projects" className="w-full">
-        <Projects />
-      </div>
+      {latest && (
+        <section aria-labelledby="writing-heading" className="pb-24 border-t border-charcoal/10 pt-16">
+          <div className="flex items-baseline justify-between gap-4 mb-8">
+            <h2 id="writing-heading" className="font-ui text-sm uppercase tracking-[0.14em] text-charcoal">
+              Writing
+            </h2>
+            <Link href="/blog" className="font-ui text-sm text-charcoal hover:text-ink underline-offset-4 hover:underline">
+              All
+            </Link>
+          </div>
+          <Link href={`/blog/${latest.slug}`} className="block group max-w-measure">
+            <p className="font-ui text-xs text-charcoal/70">{latest.date}</p>
+            <h3 className="mt-2 text-2xl text-ink group-hover:text-charcoal transition-colors">
+              {latest.title}
+            </h3>
+            <p className="mt-2 text-charcoal">{latest.dek}</p>
+          </Link>
+        </section>
+      )}
 
-      {/* Contact Section */}
-      <div className="w-full">
-        <Contact />
-      </div>
+      <section id="contact" aria-labelledby="contact-heading" className="pb-8 border-t border-charcoal/10 pt-16">
+        <h2 id="contact-heading" className="font-ui text-sm uppercase tracking-[0.14em] text-charcoal mb-6">
+          Contact
+        </h2>
+        <p className="max-w-measure text-lg text-charcoal leading-relaxed mb-8">
+          Work starts with a conversation.
+        </p>
+        <div className="flex flex-wrap gap-x-6 gap-y-3 font-ui text-sm">
+          <Link href="/talk" className="text-ink underline underline-offset-4">
+            Book a conversation
+          </Link>
+          <a href={`mailto:${SITE.email}`} className="text-charcoal hover:text-ink underline-offset-4 hover:underline">
+            {SITE.email}
+          </a>
+          <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" className="text-charcoal hover:text-ink underline-offset-4 hover:underline">
+            LinkedIn
+          </a>
+          <a href={SITE.github} target="_blank" rel="noopener noreferrer" className="text-charcoal hover:text-ink underline-offset-4 hover:underline">
+            GitHub
+          </a>
+        </div>
+      </section>
     </main>
   );
 }

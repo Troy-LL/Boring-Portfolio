@@ -1,20 +1,30 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-
-const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
+import Footer from "@/components/Footer";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  description: "Official portfolio of Troy Lauren T. Lazaro. IT Student at PUP, AI/ML Researcher, and Community Leader. Focused on building with intention. Life is too short to be boring.",
-  keywords: ["Troy Lazaro", "AI Researcher", "IT Student", "PUP Manila", "Full Stack Developer", "Boring Portfolio"],
-  authors: [{ name: "Troy Lauren T. Lazaro" }],
+  title: {
+    default: `${SITE.name} | Portfolio`,
+    template: `%s | ${SITE.name}`,
+  },
+  description: `${SITE.positioning} ${SITE.motto}`,
+  keywords: [
+    "Troy Lazaro",
+    "Troy Lauren T. Lazaro",
+    "portfolio",
+    "PUP",
+    "software",
+    "AI",
+  ],
+  authors: [{ name: SITE.name }],
   openGraph: {
-    title: "TL | Portfolio",
-    description: "IT Student, AI/ML Researcher & Community Leader. Life is too short to be boring.",
+    title: `${SITE.name} | Portfolio`,
+    description: `${SITE.positioning} ${SITE.motto}`,
     type: "website",
     locale: "en_PH",
-  }
+  },
 };
 
 export default function RootLayout({
@@ -23,10 +33,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="antialiased font-sans">
+    <html lang="en">
+      <body className="min-h-screen flex flex-col">
         <Navbar />
-        {children}
+        <div className="flex-1">{children}</div>
+        <Footer />
       </body>
     </html>
   );
