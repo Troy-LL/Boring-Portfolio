@@ -47,6 +47,15 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: [
+      { url: "/brand/tl.ico", sizes: "48x48" },
+      { url: "/brand/tl.png", type: "image/png", sizes: "512x512" },
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/brand/apple.png", sizes: "180x180", type: "image/png" }],
+  },
 };
 
 export default function RootLayout({

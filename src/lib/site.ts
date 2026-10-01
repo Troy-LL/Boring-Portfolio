@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Troy Lazaro",
   mark: "TL",
-  url: "https://tlportfolio.vercel.app",
+  url: "https://www.troylazaro.dev",
   email: "troylazaro09@gmail.com",
   role: "AI engineer & builder",
   positioning: "I build with AI, break it, fix it, and ship it.",
