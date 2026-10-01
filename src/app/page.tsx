@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { getFeaturedWork } from "@/lib/work";
-import { EXPERIENCE } from "@/lib/experience";
 import { getLatestPost } from "@/lib/posts";
 import { SITE } from "@/lib/site";
+import WorkList from "@/components/WorkList";
+import ExperienceList from "@/components/ExperienceList";
 
 export default function Home() {
   const featured = getFeaturedWork();
-  const peekRoles = EXPERIENCE.slice(0, 3);
   const latest = getLatestPost();
 
   return (
@@ -38,7 +38,7 @@ export default function Home() {
       </section>
 
       <section aria-labelledby="work-heading" className="pb-24 border-t border-charcoal/10 pt-16">
-        <div className="flex items-baseline justify-between gap-4 mb-10">
+        <div className="flex items-baseline justify-between gap-4 mb-6">
           <h2 id="work-heading" className="font-ui text-sm uppercase tracking-[0.14em] text-charcoal">
             Selected work
           </h2>
@@ -46,48 +46,19 @@ export default function Home() {
             All work
           </Link>
         </div>
-        <ul className="divide-y divide-charcoal/10 border-y border-charcoal/10">
-          {featured.map((item) => (
-            <li key={item.slug}>
-              <Link
-                href={`/work/${item.slug}`}
-                className="block py-8 group"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
-                  <h3 className="font-body text-2xl text-ink group-hover:text-charcoal transition-colors">
-                    {item.title}
-                  </h3>
-                  <span className="font-ui text-xs text-charcoal/70">{item.category}</span>
-                </div>
-                <p className="mt-3 max-w-measure text-charcoal leading-relaxed">
-                  {item.summary}
-                </p>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <p className="font-ui text-xs text-charcoal/60 mb-4">Open a row for more.</p>
+        <WorkList items={featured} />
       </section>
 
-      <section aria-labelledby="about-heading" className="pb-24">
+      <section aria-labelledby="about-heading" className="pb-24 pt-8">
         <h2 id="about-heading" className="font-ui text-sm uppercase tracking-[0.14em] text-charcoal mb-8">
           About
         </h2>
-        <p className="max-w-measure text-lg text-charcoal leading-relaxed">
+        <p className="max-w-measure text-lg text-charcoal leading-relaxed mb-10">
           I&apos;m Troy. IT student at PUP, based in Manila. I like making tools and sites, then sitting with them until they work and look cared for.
         </p>
-        <ul className="mt-10 space-y-5 max-w-measure">
-          {peekRoles.map((role) => (
-            <li key={`${role.company}-${role.role}`} className="border-b border-charcoal/10 pb-5">
-              <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
-                <p className="text-ink">
-                  {role.role}
-                  <span className="text-charcoal"> · {role.company}</span>
-                </p>
-                <span className="font-ui text-xs text-charcoal/70">{role.period}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <p className="font-ui text-xs text-charcoal/60 mb-2">Roles. Open for detail.</p>
+        <ExperienceList />
       </section>
 
       {latest && (
