@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Expandable from "@/components/Expandable";
+import ButtonLink from "@/components/ButtonLink";
 import type { WorkItem } from "@/lib/work";
 
 export default function WorkList({ items }: { items: WorkItem[] }) {
@@ -11,7 +11,9 @@ export default function WorkList({ items }: { items: WorkItem[] }) {
             summary={
               <>
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
-                  <h3 className="font-body text-2xl text-ink">{item.title}</h3>
+                  <span className="font-body text-2xl text-ink block">
+                    {item.title}
+                  </span>
                   <span className="font-ui text-xs text-charcoal/70">
                     {item.category}
                   </span>
@@ -28,24 +30,19 @@ export default function WorkList({ items }: { items: WorkItem[] }) {
             <p className="mt-5 font-ui text-sm text-charcoal/80">
               {item.tech.join(" · ")}
             </p>
-            <div className="mt-5 flex flex-wrap gap-5 font-ui text-sm">
-              {item.links.map((link) => (
-                <a
+            <div className="mt-5 flex flex-wrap gap-3">
+              {item.links.map((link, index) => (
+                <ButtonLink
                   key={link.href}
                   href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-ink underline underline-offset-4"
+                  variant={index === 0 ? "solid" : "outline"}
                 >
                   {link.label}
-                </a>
+                </ButtonLink>
               ))}
-              <Link
-                href={`/work/${item.slug}`}
-                className="text-charcoal hover:text-ink underline-offset-4 hover:underline"
-              >
+              <ButtonLink href={`/work/${item.slug}`} variant="outline">
                 Open page
-              </Link>
+              </ButtonLink>
             </div>
           </Expandable>
         </li>

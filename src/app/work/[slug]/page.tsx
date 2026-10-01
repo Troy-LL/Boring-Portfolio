@@ -1,6 +1,7 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import ButtonLink from "@/components/ButtonLink";
 import { WORK, getWorkBySlug } from "@/lib/work";
 
 type Props = { params: { slug: string } };
@@ -24,12 +25,13 @@ export default function WorkDetailPage({ params }: Props) {
 
   return (
     <main className="mx-auto max-w-page px-6 py-16 sm:py-24">
-      <Link
-        href="/work"
-        className="font-ui text-sm text-charcoal hover:text-ink underline-offset-4 hover:underline"
-      >
-        Back to work
-      </Link>
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Work", href: "/work" },
+          { label: item.title },
+        ]}
+      />
       <p className="mt-10 font-ui text-xs uppercase tracking-[0.14em] text-charcoal">
         {item.category}
       </p>
@@ -47,17 +49,15 @@ export default function WorkDetailPage({ params }: Props) {
       <p className="mt-10 font-ui text-sm text-charcoal">
         {item.tech.join(" · ")}
       </p>
-      <div className="mt-8 flex flex-wrap gap-5 font-ui text-sm">
-        {item.links.map((link) => (
-          <a
+      <div className="mt-8 flex flex-wrap gap-3">
+        {item.links.map((link, index) => (
+          <ButtonLink
             key={link.href}
             href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-ink underline underline-offset-4"
+            variant={index === 0 ? "solid" : "outline"}
           >
             {link.label}
-          </a>
+          </ButtonLink>
         ))}
       </div>
     </main>

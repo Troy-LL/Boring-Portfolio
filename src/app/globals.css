@@ -84,9 +84,14 @@
 
   a,
   button {
-    transition-property: color, background-color, border-color, opacity, transform;
-    transition-duration: var(--duration-apple);
+    transition-property: color, background-color, border-color, opacity;
+    transition-duration: 150ms;
     transition-timing-function: var(--ease-apple);
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
   }
 
   ::selection {
@@ -106,6 +111,22 @@
 
   .font-body {
     font-family: "Gambetta", Georgia, serif;
+  }
+
+  .settle {
+    animation: settle-up 500ms ease-out both;
+  }
+}
+
+@keyframes settle-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -140,6 +161,10 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .settle {
+    animation: none;
   }
 }
 

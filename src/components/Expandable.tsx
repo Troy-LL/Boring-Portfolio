@@ -21,6 +21,7 @@ export default function Expandable({ summary, children, className }: ExpandableP
   const [height, setHeight] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
+  const regionRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
 
   useEffect(() => {
@@ -30,6 +31,13 @@ export default function Expandable({ summary, children, className }: ExpandableP
     media.addEventListener("change", sync);
     return () => media.removeEventListener("change", sync);
   }, []);
+
+  useEffect(() => {
+    const node = regionRef.current;
+    if (!node) return;
+    if (open) node.removeAttribute("inert");
+    else node.setAttribute("inert", "");
+  }, [open]);
 
   const measure = useCallback(() => {
     const node = panelRef.current;
@@ -53,7 +61,11 @@ export default function Expandable({ summary, children, className }: ExpandableP
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((value) => !value)}
-        className="w-full text-left py-6 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+        className={cn(
+          "w-full appearance-none bg-transparent border-0 shadow-none rounded-none",
+          "text-left text-ink font-inherit py-6 px-0 m-0 cursor-pointer",
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+        )}
       >
         <div className="flex items-start gap-4">
           <div className="flex-1 min-w-0">{summary}</div>
@@ -61,7 +73,7 @@ export default function Expandable({ summary, children, className }: ExpandableP
             aria-hidden
             className={cn(
               "font-ui text-charcoal/50 text-sm mt-1 shrink-0 origin-center",
-              "transition-transform duration-[420ms] ease-apple",
+              "transition-transform duration-apple ease-apple",
               open && "rotate-180"
             )}
           >
@@ -70,12 +82,13 @@ export default function Expandable({ summary, children, className }: ExpandableP
         </div>
       </button>
       <div
+        ref={regionRef}
         id={panelId}
         role="region"
         aria-hidden={!open}
         className={cn(
           "overflow-hidden",
-          !reduceMotion && "transition-[height] duration-[420ms] ease-apple"
+          !reduceMotion && "transition-[height] duration-apple ease-apple"
         )}
         style={{ height: open ? height : 0 }}
       >
@@ -83,7 +96,7 @@ export default function Expandable({ summary, children, className }: ExpandableP
           <div
             className={cn(
               !reduceMotion &&
-                "transition-[opacity,transform] duration-[420ms] ease-apple",
+                "transition-[opacity,transform] duration-apple ease-apple",
               open
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 -translate-y-1"

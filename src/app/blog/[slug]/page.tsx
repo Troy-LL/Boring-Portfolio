@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { POSTS, getPostBySlug } from "@/lib/posts";
 
 type Props = { params: { slug: string } };
@@ -24,12 +24,13 @@ export default function BlogPostPage({ params }: Props) {
 
   return (
     <main className="mx-auto max-w-page px-6 py-16 sm:py-24">
-      <Link
-        href="/blog"
-        className="font-ui text-sm text-charcoal hover:text-ink underline-offset-4 hover:underline"
-      >
-        Back to blog
-      </Link>
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Blog", href: "/blog" },
+          { label: post.title },
+        ]}
+      />
       <p className="mt-10 font-ui text-xs text-charcoal/70">{post.date}</p>
       <h1 className="mt-3 font-display italic text-4xl sm:text-5xl text-ink max-w-measure">
         {post.title}

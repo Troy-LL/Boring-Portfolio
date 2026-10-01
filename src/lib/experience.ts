@@ -13,7 +13,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Aug 2026 – Present",
     startDate: "2026-08-01",
     description:
-      "Owns engineering for chapter public sites (asesmanila.com on Vite/React/Tailwind/Cloudflare, Build with ASES on Next.js), SEO basics, and design iteration with chapter leadership. Previously University Lead – PUP Manila (Jan–Aug 2026).",
+      "Owns engineering on chapter public sites: asesmanila.com (Vite/React/Tailwind on Cloudflare) and Build with ASES (Next.js), including deploys and live fixes. Ships SEO basics (sitemap, robots, meta) and iterates with design and chapter leadership until live pages match the org. Previously University Lead – PUP Manila (Jan–Aug 2026).",
   },
   {
     company: "Seekers Guild",
@@ -21,7 +21,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Dec 2025 – Present",
     startDate: "2025-12-01",
     description:
-      "Advises the partnerships team on event partners and outreach.",
+      "Advises the partnerships team on event partners and how to approach them.",
   },
   {
     company: "DataCamp",
@@ -32,20 +32,20 @@ export const EXPERIENCE: ExperienceItem[] = [
       "Scholarship for SQL, Python, and AI coursework. Ranked 1st on the department DataCamp leaderboard for four consecutive months.",
   },
   {
-    company: "FlyRank AI",
-    role: "Backend AI Engineer Intern",
-    period: "Jun 2026 – Sep 2026",
-    startDate: "2026-06-01",
-    description:
-      "Learning-focused internship studying Backend AI materials and curriculum. Remote, Philippines.",
-  },
-  {
     company: "ED3N Ventures",
     role: "Software Engineer Intern",
     period: "Jul 2026 – Aug 2026",
     startDate: "2026-07-01",
     description:
-      "RAG path over multimodal business data for a chatbot, Composio automation with RBAC prompts, and simple dashboards beside chat. Hybrid, Manila.",
+      "With a teammate, built a RAG path over multimodal business data for a chatbot. Helped ship a Composio automation layer steered with system and RBAC prompts. Built simple dashboards so the team could decide from charts, not only chat. Hybrid, Manila.",
+  },
+  {
+    company: "FlyRank AI",
+    role: "Backend AI Engineer Intern",
+    period: "Jun 2026 – Sep 2026",
+    startDate: "2026-06-01",
+    description:
+      "Learning-focused internship studying Backend AI materials and curriculum rather than shipping production features. Remote, Philippines.",
   },
   {
     company: "GDG on Campus – PUP Manila",
@@ -53,55 +53,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Jan 2026 – Aug 2026",
     startDate: "2026-01-01",
     description:
-      "Member growth programs, skill tracking, and leadership opportunities. Previously Co-Lead (Sep 2025–Jan 2026), Associate (Nov 2024–Aug 2025), and Data and ML Cadet (Nov 2024–2025).",
-  },
-  {
-    company: "AWS Cloud Club – Philippines",
-    role: "Community Engagement Officer",
-    period: "2025 – Present",
-    startDate: "2025-01-01",
-    description:
-      "Student and alumni outreach, speakers and mentors, program visibility with marketing.",
-  },
-  {
-    company: "Microsoft Student Community – PUP",
-    role: "Executive Secretary, Leadership Development",
-    period: "2025 – Present",
-    startDate: "2025-01-01",
-    description:
-      "Documentation, communications, and scheduling. Usher support for TechShift.",
-  },
-  {
-    company: "IBITS – PUP",
-    role: "Deputy Head for Community Involvement",
-    period: "Oct 2025 – Present",
-    startDate: "2025-10-01",
-    description:
-      "Support outreach projects under the Head of Community Involvement.",
-  },
-  {
-    company: "AWS Cloud Club – PUP",
-    role: "Community Relations Resident",
-    period: "2025 – Present",
-    startDate: "2025-01-01",
-    description:
-      "Partnerships and engagement among members, mentors, and the campus cloud community.",
-  },
-  {
-    company: "OpenVerse",
-    role: "Volunteer",
-    period: "Dec 2025 – Present",
-    startDate: "2025-12-01",
-    description:
-      "Volunteer contributor in the OpenVerse community.",
-  },
-  {
-    company: "Junior Council Officers (JCO)",
-    role: "People’s Advocacies Campaign Committee Member",
-    period: "2024 – 2025",
-    startDate: "2024-01-01",
-    description:
-      "Student empowerment campaigns and campus civic outreach.",
+      "Designed member growth programs, skill tracking, and leadership opportunities. Previously Co-Lead (Sep 2025–Jan 2026), Associate (Nov 2024–Aug 2025), and Data and ML Cadet (Nov 2024–2025).",
   },
   {
     company: "DOST–PAGASA",
@@ -109,6 +61,6 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Apr 2023 – May 2023",
     startDate: "2023-04-01",
     description:
-      "Internship at the Science Garden, Diliman. Data operations and meteorological support.",
+      "Science Garden, Diliman. Helped calibrate humidity and temperature instruments for product validation; rotated through forecasting teams on station data and instruments.",
   },
 ];

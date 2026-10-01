@@ -56,11 +56,16 @@ export const WORK: WorkItem[] = [
       "PUP SIAS schedule into Google Calendar. 120+ active users on the Chrome Web Store.",
     body: [
       "A Chrome extension that turns a campus schedule page into calendar events you can actually use.",
-      "Built for a narrow problem students hit every term. 120+ active users on the Chrome Web Store.",
+      "Also reads GWA and Latin honors standing from the grades page. 120+ active users on the Chrome Web Store.",
     ],
     category: "Shipped product",
     tech: ["JavaScript", "Chrome Extension"],
     links: [
+      {
+        label: "Chrome Web Store",
+        href: "https://chromewebstore.google.com/detail/pupsync/lajkaclhliicgdfdlnfioaodjnkjmedp",
+      },
+      { label: "Site", href: "https://pupsync.niched.tech" },
       { label: "GitHub", href: "https://github.com/Troy-LL/Pupsync" },
     ],
     featured: true,
@@ -84,14 +89,15 @@ export const WORK: WorkItem[] = [
     slug: "openreach",
     title: "OpenReach",
     summary:
-      "Reach for scientific papers that were not findable before. Local-first.",
+      "Reach for scientific papers that were not findable before. Local-first scoring, hosted UI.",
     body: [
-      "OpenReach is a TypeScript tool for finding papers that usual search misses.",
-      "No public click-through deploy yet. The honest proof is the repo and a local run.",
+      "OpenReach retrieves candidates across a dozen scholarly indexes, then scores title and abstract against your question with Jev. No embeddings, no vector database.",
+      "Live at openreach.niched.tech, including remote MCP. Browse sample results works without a key.",
     ],
     category: "Research tooling",
     tech: ["TypeScript"],
     links: [
+      { label: "Live", href: "https://openreach.niched.tech" },
       { label: "GitHub", href: "https://github.com/Troy-LL/OpenReach" },
     ],
   },

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getFeaturedWork } from "@/lib/work";
 import { getLatestPost } from "@/lib/posts";
 import { SITE } from "@/lib/site";
+import ButtonLink from "@/components/ButtonLink";
 import WorkList from "@/components/WorkList";
 import ExperienceList from "@/components/ExperienceList";
 
@@ -15,61 +16,54 @@ export default function Home() {
         <h1 className="font-display italic text-5xl sm:text-6xl md:text-7xl text-ink tracking-tight">
           {SITE.name}
         </h1>
-        <p className="mt-6 max-w-measure text-xl sm:text-2xl text-charcoal leading-relaxed">
+        <p className="mt-5 font-ui text-xs uppercase tracking-[0.16em] text-amber">
+          {SITE.role}
+        </p>
+        <p className="settle mt-4 max-w-measure text-xl sm:text-2xl text-charcoal leading-relaxed">
           {SITE.positioning}
         </p>
         <p className="mt-4 font-ui text-sm text-charcoal/80">
           {SITE.location}. Open to conversations.
         </p>
-        <div className="mt-10 flex flex-wrap gap-4 font-ui text-sm">
-          <Link
-            href="/work"
-            className="inline-flex items-center px-5 py-2.5 bg-ink text-paper hover:bg-warm-black transition-colors"
-          >
-            Selected work
-          </Link>
-          <Link
-            href="/talk"
-            className="inline-flex items-center px-5 py-2.5 border border-charcoal/30 text-ink hover:border-ink transition-colors"
-          >
+        <div className="mt-10 flex flex-wrap gap-3">
+          <ButtonLink href="/work">Selected work</ButtonLink>
+          <ButtonLink href="/talk" variant="outline">
             Talk
-          </Link>
+          </ButtonLink>
         </div>
       </section>
 
       <section aria-labelledby="work-heading" className="pb-24 border-t border-charcoal/10 pt-16">
         <div className="flex items-baseline justify-between gap-4 mb-6">
-          <h2 id="work-heading" className="font-ui text-sm uppercase tracking-[0.14em] text-charcoal">
+          <h2 id="work-heading" className="settle font-ui text-sm uppercase tracking-[0.14em] text-charcoal">
             Selected work
           </h2>
-          <Link href="/work" className="font-ui text-sm text-charcoal hover:text-ink underline-offset-4 hover:underline">
+          <ButtonLink href="/work" variant="outline" className="px-3 py-1.5">
             All work
-          </Link>
+          </ButtonLink>
         </div>
-        <p className="font-ui text-xs text-charcoal/60 mb-4">Open a row for more.</p>
         <WorkList items={featured} />
       </section>
 
       <section aria-labelledby="about-heading" className="pb-24 pt-8">
-        <h2 id="about-heading" className="font-ui text-sm uppercase tracking-[0.14em] text-charcoal mb-8">
+        <h2 id="about-heading" className="settle font-ui text-sm uppercase tracking-[0.14em] text-charcoal mb-8">
           About
         </h2>
         <p className="max-w-measure text-lg text-charcoal leading-relaxed mb-10">
-          I&apos;m Troy. IT student at PUP, based in Manila. I like making tools and sites, then sitting with them until they work and look cared for.
+          IT student at PUP, Manila.
         </p>
-        <p className="font-ui text-xs text-charcoal/60 mb-2">Roles. Open for detail.</p>
         <ExperienceList />
       </section>
 
       {latest && (
         <section aria-labelledby="writing-heading" className="pb-24 border-t border-charcoal/10 pt-16">
           <div className="flex items-baseline justify-between gap-4 mb-8">
-            <h2 id="writing-heading" className="font-ui text-sm uppercase tracking-[0.14em] text-charcoal">
+            <h2 id="writing-heading" className="settle font-ui text-sm uppercase tracking-[0.14em] text-charcoal">
               Writing
             </h2>
-            <Link href="/blog" className="font-ui text-sm text-charcoal hover:text-ink underline-offset-4 hover:underline">
+            <ButtonLink href="/blog" variant="outline" className="px-3 py-1.5">
               All
-            </Link>
+            </ButtonLink>
           </div>
           <Link href={`/blog/${latest.slug}`} className="block group max-w-measure">
             <p className="font-ui text-xs text-charcoal/70">{latest.date}</p>
@@ -82,25 +76,23 @@ export default function Home() {
       )}
 
       <section id="contact" aria-labelledby="contact-heading" className="pb-8 border-t border-charcoal/10 pt-16">
-        <h2 id="contact-heading" className="font-ui text-sm uppercase tracking-[0.14em] text-charcoal mb-6">
+        <h2 id="contact-heading" className="settle font-ui text-sm uppercase tracking-[0.14em] text-charcoal mb-6">
           Contact
         </h2>
         <p className="max-w-measure text-lg text-charcoal leading-relaxed mb-8">
           Work starts with a conversation.
         </p>
-        <div className="flex flex-wrap gap-x-6 gap-y-3 font-ui text-sm">
-          <Link href="/talk" className="text-ink underline underline-offset-4">
-            Book a conversation
-          </Link>
-          <a href={`mailto:${SITE.email}`} className="text-charcoal hover:text-ink underline-offset-4 hover:underline">
-            {SITE.email}
-          </a>
-          <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" className="text-charcoal hover:text-ink underline-offset-4 hover:underline">
+        <div className="flex flex-wrap gap-3">
+          <ButtonLink href="/talk">Book a conversation</ButtonLink>
+          <ButtonLink href={`mailto:${SITE.email}`} variant="outline">
+            Email
+          </ButtonLink>
+          <ButtonLink href={SITE.linkedin} variant="outline">
             LinkedIn
-          </a>
-          <a href={SITE.github} target="_blank" rel="noopener noreferrer" className="text-charcoal hover:text-ink underline-offset-4 hover:underline">
+          </ButtonLink>
+          <ButtonLink href={SITE.github} variant="outline">
             GitHub
-          </a>
+          </ButtonLink>
         </div>
       </section>
     </main>

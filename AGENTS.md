@@ -18,6 +18,8 @@ Local feel notes: `docs/design.md`.
 - Featured home work stays seeking, EditLayer, Pupsync until the shortlist is re-run.
 - Booking is `/talk` → `NEXT_PUBLIC_BOOKING_URL` (Google Appointment schedule). No embed widgets.
 - Prefer deletion over decoration.
+- Experience stays short: paid/intern work, current signal roles, one campus lead max. Do not mirror every LinkedIn org entry.
+- Footer creative link is `SITE.creative` → https://desktop.troylazaro.dev
 
 ## Don't
 
