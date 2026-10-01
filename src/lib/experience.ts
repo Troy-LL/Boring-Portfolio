@@ -9,19 +9,51 @@ export type ExperienceItem = {
 export const EXPERIENCE: ExperienceItem[] = [
   {
     company: "ASES Manila",
-    role: "University Lead",
-    period: "2026 – Present",
-    startDate: "2026-01-01",
+    role: "Marketing Officer (Web/SEO)",
+    period: "Aug 2026 – Present",
+    startDate: "2026-08-01",
     description:
-      "Campus ambassador for ASES at PUP. Content, founder connections, and university lead network.",
+      "Owns engineering for chapter public sites (asesmanila.com on Vite/React/Tailwind/Cloudflare, Build with ASES on Next.js), SEO basics, and design iteration with chapter leadership. Previously University Lead – PUP Manila (Jan–Aug 2026).",
+  },
+  {
+    company: "Seekers Guild",
+    role: "Member",
+    period: "Dec 2025 – Present",
+    startDate: "2025-12-01",
+    description:
+      "Advises the partnerships team on event partners and outreach.",
+  },
+  {
+    company: "DataCamp",
+    role: "DataCamp Scholar",
+    period: "Dec 2025 – Present",
+    startDate: "2025-12-01",
+    description:
+      "Scholarship for SQL, Python, and AI coursework. Ranked 1st on the department DataCamp leaderboard for four consecutive months.",
+  },
+  {
+    company: "FlyRank AI",
+    role: "Backend AI Engineer Intern",
+    period: "Jun 2026 – Sep 2026",
+    startDate: "2026-06-01",
+    description:
+      "Learning-focused internship studying Backend AI materials and curriculum. Remote, Philippines.",
+  },
+  {
+    company: "ED3N Ventures",
+    role: "Software Engineer Intern",
+    period: "Jul 2026 – Aug 2026",
+    startDate: "2026-07-01",
+    description:
+      "RAG path over multimodal business data for a chatbot, Composio automation with RBAC prompts, and simple dashboards beside chat. Hybrid, Manila.",
   },
   {
     company: "GDG on Campus – PUP Manila",
     role: "Talent Development Lead",
-    period: "2026 – Present",
+    period: "Jan 2026 – Aug 2026",
     startDate: "2026-01-01",
     description:
-      "Programs, member engagement tracking, and leadership pipelines. Previously Co-Lead (2025–2026) and Associate (2024–2025).",
+      "Member growth programs, skill tracking, and leadership opportunities. Previously Co-Lead (Sep 2025–Jan 2026), Associate (Nov 2024–Aug 2025), and Data and ML Cadet (Nov 2024–2025).",
   },
   {
     company: "AWS Cloud Club – Philippines",
@@ -62,14 +94,6 @@ export const EXPERIENCE: ExperienceItem[] = [
     startDate: "2025-12-01",
     description:
       "Volunteer contributor in the OpenVerse community.",
-  },
-  {
-    company: "Seekers Guild",
-    role: "Member",
-    period: "Dec 2025 – Present",
-    startDate: "2025-12-01",
-    description:
-      "Member of Seekers Guild.",
   },
   {
     company: "Junior Council Officers (JCO)",
