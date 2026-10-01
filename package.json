@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "analyze": "cross-env ANALYZE=true next build",
-    "optimize-gallery": "node scripts/optimize-gallery.mjs"
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
     "clsx": "^2.1.1",
