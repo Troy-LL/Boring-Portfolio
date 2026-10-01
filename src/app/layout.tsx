@@ -4,26 +4,48 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SITE } from "@/lib/site";
 
+const title = `${SITE.name} | Portfolio`;
+const description = `${SITE.role}. ${SITE.positioning} ${SITE.location}.`;
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} | Portfolio`,
+    default: title,
     template: `%s | ${SITE.name}`,
   },
-  description: `${SITE.positioning} ${SITE.motto}`,
+  description,
   keywords: [
     "Troy Lazaro",
     "Troy Lauren T. Lazaro",
+    "AI engineer",
+    "builder",
     "portfolio",
     "PUP",
+    "Manila",
     "software",
     "AI",
   ],
-  authors: [{ name: SITE.name }],
+  authors: [{ name: SITE.name, url: SITE.url }],
+  creator: SITE.name,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: `${SITE.name} | Portfolio`,
-    description: `${SITE.positioning} ${SITE.motto}`,
-    type: "website",
+    title,
+    description,
+    url: SITE.url,
+    siteName: SITE.name,
     locale: "en_PH",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
