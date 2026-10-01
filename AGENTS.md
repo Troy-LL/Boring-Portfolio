@@ -15,7 +15,7 @@ Local feel notes: `docs/design.md`.
 ## Do
 
 - Keep Work entries honest. One sentence a recruiter can repeat. One proof link. No claims the source README refuses.
-- Featured home work stays seeking, EditLayer, May Pasok Ba? until the shortlist is re-run.
+- Featured home work stays seeking, EditLayer, Pupsync until the shortlist is re-run.
 - Booking is `/talk` → `NEXT_PUBLIC_BOOKING_URL` (Google Appointment schedule). No embed widgets.
 - Prefer deletion over decoration.
 

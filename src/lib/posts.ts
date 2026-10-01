@@ -24,7 +24,7 @@ export const POSTS: Post[] = [
     date: "2026-10-01",
     dek: "Signal, depth, evidence, brand fit, maintenance truth. Ten points. Harsh.",
     body: [
-      "seeking, EditLayer, and May Pasok Ba? landed on the home page because they clear the bar without a salesperson.",
+      "seeking, EditLayer, and Pupsync landed on the home page because they clear the bar without a salesperson.",
       "Skill Swipe is gone. The repo 404s. Tinig waits for a clip. Research stays paper-first when the README refuses claimed runs.",
       "Fewer items. Honest sentences. One proof link each.",
     ],

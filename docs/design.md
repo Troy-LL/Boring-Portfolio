@@ -32,6 +32,6 @@ Nav: Work · Blog · Talk · Resume.
 
 Scored on recruiter signal, technical depth, evidence, brand fit, maintenance truth.
 
-Featured: seeking · EditLayer · May Pasok Ba?
+Featured: seeking · EditLayer · Pupsync
 
 Include list and exclusions live in `src/lib/work.ts` and the redesign plan trail.

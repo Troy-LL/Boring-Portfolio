@@ -50,37 +50,20 @@ export const WORK: WorkItem[] = [
     featured: true,
   },
   {
-    slug: "may-pasok-ba",
-    title: "May Pasok Ba?",
-    summary:
-      "WALA or MERON for classes, work, and government offices in the Philippines, from allowlisted news.",
-    body: [
-      "Type a place. The page answers from allowlisted Philippine outlets, not random blogs and not Facebook.",
-      "Runs on Cloudflare Workers with KV caching and careful Browser Rendering budget for Google News decode paths.",
-      "Not an official LGU or DepEd feed. MERON means no matching evidence, not an all-clear.",
-    ],
-    category: "Shipped product",
-    tech: ["Cloudflare Workers", "KV", "TypeScript"],
-    links: [
-      { label: "Live", href: "https://may-pasok-ba.niched.tech/" },
-      { label: "GitHub", href: "https://github.com/Troy-LL/may-pasok-ba" },
-    ],
-    featured: true,
-  },
-  {
     slug: "pupsync",
     title: "Pupsync",
     summary:
-      "PUP SIAS schedule, parsed off the page and dropped into Google Calendar.",
+      "PUP SIAS schedule into Google Calendar. 120+ active users on the Chrome Web Store.",
     body: [
       "A Chrome extension that turns a campus schedule page into calendar events you can actually use.",
-      "Narrow problem. Real distribution on the Chrome Web Store.",
+      "Built for a narrow problem students hit every term. 120+ active users on the Chrome Web Store.",
     ],
-    category: "Utility",
+    category: "Shipped product",
     tech: ["JavaScript", "Chrome Extension"],
     links: [
       { label: "GitHub", href: "https://github.com/Troy-LL/Pupsync" },
     ],
+    featured: true,
   },
   {
     slug: "ramjob",
