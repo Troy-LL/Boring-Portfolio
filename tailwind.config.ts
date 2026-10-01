@@ -24,6 +24,12 @@ const config: Config = {
         measure: "42rem",
         page: "48rem",
       },
+      transitionTimingFunction: {
+        apple: "cubic-bezier(0.32, 0.72, 0, 1)",
+      },
+      transitionDuration: {
+        apple: "420ms",
+      },
     },
   },
   plugins: [],

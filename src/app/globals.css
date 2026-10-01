@@ -65,15 +65,28 @@
     --warm-black: #191512;
     --charcoal: #292623;
     --amber: #c9a36a;
+    --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
+    --duration-apple: 420ms;
   }
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   body {
     @apply bg-paper text-ink antialiased;
     font-family: "Gambetta", Georgia, serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a,
+  button {
+    transition-property: color, background-color, border-color, opacity, transform;
+    transition-duration: var(--duration-apple);
+    transition-timing-function: var(--ease-apple);
   }
 
   ::selection {
@@ -108,6 +121,7 @@
   background: #d8d2c8;
   border: 3px solid var(--paper);
   border-radius: 100px;
+  transition: background-color var(--duration-apple) var(--ease-apple);
 }
 
 * {
@@ -129,7 +143,7 @@
   }
 }
 
-summary:focus-visible {
+button:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 4px;
 }

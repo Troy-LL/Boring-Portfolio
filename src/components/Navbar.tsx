@@ -10,11 +10,11 @@ const NAV = [
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 bg-paper/90 backdrop-blur-sm border-b border-charcoal/10">
+    <header className="sticky top-0 z-50 bg-paper/85 backdrop-blur-xl border-b border-charcoal/10 supports-[backdrop-filter]:bg-paper/70">
       <nav className="mx-auto max-w-page px-6 py-4 flex items-center justify-between gap-6">
         <Link
           href="/"
-          className="font-display italic text-xl text-ink hover:text-charcoal transition-colors"
+          className="font-display italic text-xl text-ink hover:text-charcoal duration-apple ease-apple"
         >
           {SITE.name}
         </Link>
@@ -23,7 +23,7 @@ export default function Navbar() {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="hover:text-ink transition-colors underline-offset-4 hover:underline"
+                className="hover:text-ink duration-apple ease-apple underline-offset-4 hover:underline"
               >
                 {item.name}
               </Link>
