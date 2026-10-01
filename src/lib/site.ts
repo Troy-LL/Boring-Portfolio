@@ -4,7 +4,7 @@ export const SITE = {
   email: "troylazaro09@gmail.com",
   positioning: "I make things. I care how they look and how they work.",
   motto: "Life’s too short to be boring.",
-  location: "Caloocan, NCR, Philippines",
+  location: "Manila, Philippines",
   github: "https://github.com/Troy-LL",
   linkedin: "https://www.linkedin.com/in/troylazaro/",
   instagram: "https://www.instagram.com/isametroy_/",
