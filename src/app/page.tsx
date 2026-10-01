@@ -73,7 +73,7 @@ export default function Home() {
           About
         </h2>
         <p className="max-w-measure text-lg text-charcoal leading-relaxed">
-          I&apos;m an IT student at PUP, from Manila. I like making tools that work and look like someone cared. {SITE.motto}
+          I&apos;m Troy. IT student at PUP, based in Manila. I like making tools and sites, then sitting with them until they work and look cared for.
         </p>
         <ul className="mt-10 space-y-5 max-w-measure">
           {peekRoles.map((role) => (
