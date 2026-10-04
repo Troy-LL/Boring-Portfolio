@@ -60,11 +60,11 @@
 
 @layer base {
   :root {
-    --paper: #f2eee8;
-    --ink: #141210;
-    --warm-black: #191512;
-    --charcoal: #292623;
-    --amber: #c9a36a;
+    --paper: #ffffff;
+    --beige: #f2eee8;
+    --ink: #1a1816;
+    --muted: #6f6a64;
+    --hairline: #eceae6;
     --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
     --duration-apple: 420ms;
   }
@@ -95,7 +95,7 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--amber) 45%, transparent);
+    background: color-mix(in srgb, var(--ink) 14%, transparent);
     color: var(--ink);
   }
 }
@@ -139,7 +139,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d8d2c8;
+  background: #e4e1dc;
   border: 3px solid var(--paper);
   border-radius: 100px;
   transition: background-color var(--duration-apple) var(--ease-apple);
@@ -147,7 +147,7 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #d8d2c8 var(--paper);
+  scrollbar-color: #e4e1dc var(--paper);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -168,6 +168,7 @@
   }
 }
 
+a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 4px;

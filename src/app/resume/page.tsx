@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import ButtonLink from "@/components/ButtonLink";
+import TextLink from "@/components/TextLink";
 import ResumeEmbed from "@/components/ResumeEmbed";
 
 export const metadata: Metadata = {
@@ -14,11 +14,14 @@ export default function ResumePage() {
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Resume" }]} />
       <div className="mt-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
         <h1 className="font-display italic text-4xl sm:text-5xl text-ink">Resume</h1>
-        <ButtonLink href="https://docs.google.com/document/d/1yyjqeEqSVWKLruBkglLBhCLlDdN5OXuWYwKMfIwDzOc/export?format=pdf">
+        <TextLink
+          href="https://docs.google.com/document/d/1yyjqeEqSVWKLruBkglLBhCLlDdN5OXuWYwKMfIwDzOc/export?format=pdf"
+          external
+        >
           Download PDF
-        </ButtonLink>
+        </TextLink>
       </div>
-      <div className="w-full border border-charcoal/15 min-h-[75vh] bg-paper overflow-hidden">
+      <div className="w-full bg-beige p-3 sm:p-4 min-h-[75vh] overflow-hidden">
         <ResumeEmbed className="min-h-[75vh]" />
       </div>
     </main>

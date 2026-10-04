@@ -10,15 +10,12 @@ const NAV = [
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 bg-paper/85 backdrop-blur-xl border-b border-charcoal/10 supports-[backdrop-filter]:bg-paper/70">
-      <nav className="mx-auto max-w-page px-6 py-4 flex items-center justify-between gap-6">
-        <Link
-          href="/"
-          className="font-display italic text-xl text-ink hover:text-charcoal"
-        >
+    <header>
+      <nav className="mx-auto max-w-page px-6 py-8 flex items-center justify-between">
+        <Link href="/" className="font-display italic text-xl text-ink">
           {SITE.name}
         </Link>
-        <ul className="flex items-center gap-5 sm:gap-7 font-ui text-sm text-charcoal">
+        <ul className="flex items-center gap-5 sm:gap-7 font-ui text-sm text-muted">
           {NAV.map((item) => (
             <li key={item.href}>
               <Link
