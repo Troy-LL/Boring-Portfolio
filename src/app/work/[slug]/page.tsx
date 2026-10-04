@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import ButtonLink from "@/components/ButtonLink";
+import TextLink from "@/components/TextLink";
 import { WORK, getWorkBySlug } from "@/lib/work";
 
 type Props = { params: { slug: string } };
@@ -32,32 +32,28 @@ export default function WorkDetailPage({ params }: Props) {
           { label: item.title },
         ]}
       />
-      <p className="mt-10 font-ui text-xs uppercase tracking-[0.14em] text-charcoal">
+      <p className="mt-10 font-ui text-xs text-muted">
         {item.category}
       </p>
       <h1 className="mt-3 font-display italic text-4xl sm:text-5xl text-ink">
         {item.title}
       </h1>
-      <p className="mt-6 max-w-measure text-xl text-charcoal leading-relaxed">
+      <p className="mt-6 max-w-measure text-xl text-muted leading-relaxed">
         {item.summary}
       </p>
-      <div className="mt-10 space-y-5 max-w-measure text-lg text-charcoal leading-relaxed">
+      <div className="mt-10 space-y-5 max-w-measure text-lg text-muted leading-relaxed">
         {item.body.map((paragraph) => (
           <p key={paragraph.slice(0, 32)}>{paragraph}</p>
         ))}
       </div>
-      <p className="mt-10 font-ui text-sm text-charcoal">
+      <p className="mt-10 font-ui text-sm text-muted">
         {item.tech.join(" · ")}
       </p>
-      <div className="mt-8 flex flex-wrap gap-3">
-        {item.links.map((link, index) => (
-          <ButtonLink
-            key={link.href}
-            href={link.href}
-            variant={index === 0 ? "solid" : "outline"}
-          >
+      <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+        {item.links.map((link) => (
+          <TextLink key={link.href} href={link.href}>
             {link.label}
-          </ButtonLink>
+          </TextLink>
         ))}
       </div>
     </main>

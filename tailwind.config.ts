@@ -9,11 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        paper: "#F2EEE8",
-        ink: "#141210",
-        "warm-black": "#191512",
-        charcoal: "#292623",
-        amber: "#C9A36A",
+        paper: "#FFFFFF",
+        beige: "#F2EEE8",
+        ink: "#1A1816",
+        muted: "#6F6A64",
+        hairline: "#ECEAE6",
       },
       fontFamily: {
         display: ["Boska", "Georgia", "serif"],

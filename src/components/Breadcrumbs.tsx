@@ -8,14 +8,14 @@ export type Crumb = {
 
 export default function Breadcrumbs({ items }: { items: Crumb[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="font-ui text-sm text-charcoal">
+    <nav aria-label="Breadcrumb" className="font-ui text-sm text-muted">
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
         {items.map((item, index) => {
           const last = index === items.length - 1;
           return (
             <Fragment key={`${item.label}-${index}`}>
               {index > 0 && (
-                <li aria-hidden className="text-charcoal/40 select-none">
+                <li aria-hidden className="text-muted/50 select-none">
                   /
                 </li>
               )}

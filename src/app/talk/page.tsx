@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import ButtonLink, { buttonClass } from "@/components/ButtonLink";
+import TextLink from "@/components/TextLink";
 import { SITE, getBookingUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -15,28 +15,24 @@ export default function TalkPage() {
     <main className="mx-auto max-w-page px-6 py-16 sm:py-24">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Talk" }]} />
       <h1 className="mt-8 font-display italic text-4xl sm:text-5xl text-ink">Talk</h1>
-      <p className="mt-6 max-w-measure text-xl text-charcoal leading-relaxed">
+      <p className="mt-6 max-w-measure text-xl text-ink leading-relaxed">
         Work starts with a conversation. Twenty minutes. No pitch deck needed.
       </p>
-      <div className="mt-12 flex flex-col sm:flex-row sm:items-center gap-3">
+      <div className="mt-12 flex flex-col sm:flex-row sm:items-center gap-x-6 gap-y-2">
         {bookingUrl ? (
-          <ButtonLink href={bookingUrl}>Pick a time</ButtonLink>
+          <TextLink href={bookingUrl} external>
+            Pick a time
+          </TextLink>
         ) : (
-          <span
-            className={buttonClass(
-              "outline",
-              "border-charcoal/20 text-charcoal/60 cursor-not-allowed hover:border-charcoal/20"
-            )}
-            title="Set NEXT_PUBLIC_BOOKING_URL"
-          >
+          <span className="text-muted" title="Set NEXT_PUBLIC_BOOKING_URL">
             Scheduling link coming soon
           </span>
         )}
-        <ButtonLink href={`mailto:${SITE.email}?subject=Conversation`} variant="outline">
+        <TextLink href={`mailto:${SITE.email}?subject=Conversation`}>
           Or email {SITE.email}
-        </ButtonLink>
+        </TextLink>
       </div>
-      <p className="mt-10 font-ui text-sm text-charcoal/70 max-w-measure">
+      <p className="mt-10 text-sm text-muted max-w-measure">
         Booking opens in Google Calendar Appointment schedules. This page stays paper. No widget embed.
       </p>
     </main>
