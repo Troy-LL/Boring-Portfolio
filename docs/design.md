@@ -32,6 +32,10 @@ Nav: Work · Blog · Talk · Resume.
 
 Inner pages use `Breadcrumbs` (`Home / Section / Title`). No “Back to” text links.
 
+## Share
+
+Link previews use the same sheet: white ground, Boska italic name, muted role, the positioning sentence, and the site host. Generated from `SITE` in `src/lib/share-card.tsx`. The favicon is the TL mark in ink on white.
+
 ## Booking
 
 `/talk` is a paper bridge. `NEXT_PUBLIC_BOOKING_URL` opens a Google Calendar Appointment schedule in a new tab. Email fallback always available.
