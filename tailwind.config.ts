@@ -19,6 +19,7 @@ const config: Config = {
         display: ["Boska", "Georgia", "serif"],
         body: ["Gambetta", "Georgia", "serif"],
         ui: ["Switzer", "system-ui", "sans-serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
       },
       maxWidth: {
         measure: "42rem",

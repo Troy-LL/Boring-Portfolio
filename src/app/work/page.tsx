@@ -11,7 +11,7 @@ export default function WorkIndexPage() {
   return (
     <main className="mx-auto max-w-page px-6 py-16 sm:py-24">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Work" }]} />
-      <h1 className="mt-8 font-display italic text-4xl sm:text-5xl text-ink mb-4">Work</h1>
+      <h1 className="mt-8 font-medium text-ink mb-4">Work</h1>
       <p className="text-muted max-w-measure mb-8">
         Shortlist that survives a harsh bar. Proof links. No costume.
       </p>

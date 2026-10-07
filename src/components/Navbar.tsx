@@ -12,10 +12,10 @@ export default function Navbar() {
   return (
     <header>
       <nav className="mx-auto max-w-page px-6 py-8 flex items-center justify-between">
-        <Link href="/" className="font-display italic text-xl text-ink">
+        <Link href="/" className="font-medium text-ink">
           {SITE.name}
         </Link>
-        <ul className="flex items-center gap-5 sm:gap-7 font-ui text-sm text-muted">
+        <ul className="flex items-center gap-5 sm:gap-7 text-muted">
           {NAV.map((item) => (
             <li key={item.href}>
               <Link

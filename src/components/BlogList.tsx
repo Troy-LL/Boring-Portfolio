@@ -8,11 +8,11 @@ export default function BlogList() {
     <ul className="border-t border-hairline">
       {posts.map((post) => (
         <li key={post.slug} className="border-b border-hairline py-6">
-          <p className="font-ui text-xs text-muted">{post.date}</p>
+          <p className="text-muted">{post.date}</p>
           <h2 className="mt-2">
             <Link
               href={`/blog/${post.slug}`}
-              className="text-2xl text-ink hover:underline"
+              className="font-medium text-ink hover:underline"
             >
               {post.title}
             </Link>

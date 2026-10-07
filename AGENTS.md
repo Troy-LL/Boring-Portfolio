@@ -23,7 +23,7 @@ Local feel notes: `docs/design.md`.
 
 ## Don't
 
-- Don't revive gallery, Brittany numbered headers, Inter, dark silver theme, or Mac OS chrome.
+- Don't revive gallery, Brittany numbered headers, dark silver theme, or Mac OS chrome. Inter stays off the home hero.
 - Don't add Calendly/cal.com iframes.
 - Don't put Tinig on Work until a real clip exists.
 - Don't commit `scratch/`.

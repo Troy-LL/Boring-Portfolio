@@ -14,7 +14,7 @@ Paper presence site. Recruiter job to do in under ninety seconds.
 
 White sheet `#FFFFFF`, ink `#1A1816`, muted `#6F6A64`, hairline `#ECEAE6`. Beige `#F2EEE8` is only an object plate (the resume frame), never body, nav, footer, or full-bleed.
 
-Type: Boska italic wordmark, Gambetta body, Switzer UI. Self-hosted in `public/fonts/`.
+Type: the home hero keeps Boska italic for the name and Gambetta for the role, positioning sentence, and location line. Everything else is Inter, self-hosted in `public/fonts/`: 16px, weight 400, line-height 1.65, letter-spacing -0.011em. Headings and item titles stay that size at weight 500 and letter-spacing -0.02em. That is the setting on emilkowal.ski, adrianabelarde.com, and bryllim.com.
 
 Signature: name, a quiet muted role line, one positioning sentence. Everything else quieter. No amber.
 
@@ -22,7 +22,7 @@ Actions are underlined text links (`TextLink`), not solid or outline buttons. Na
 
 Lists are open. No accordions. Hairlines only between rows.
 
-Refuse: beige page, badge walls, numbered section chrome, skill chips, card grids, gallery, Calendly embeds, Inter, near-black default, pill buttons.
+Refuse: beige page, badge walls, numbered section chrome, skill chips, card grids, gallery, Calendly embeds, Inter on the home hero, near-black default, pill buttons.
 
 ## IA
 
