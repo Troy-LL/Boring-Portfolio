@@ -58,6 +58,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --paper: #ffffff;
@@ -76,7 +92,12 @@
 
   body {
     @apply bg-paper text-ink antialiased;
-    font-family: "Gambetta", Georgia, serif;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: -0.011em;
+    font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -111,6 +132,10 @@
 
   .font-body {
     font-family: "Gambetta", Georgia, serif;
+  }
+
+  .font-medium {
+    letter-spacing: -0.02em;
   }
 
   .settle {

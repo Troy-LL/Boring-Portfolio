@@ -10,11 +10,11 @@ export default function WorkList({ items }: { items: WorkItem[] }) {
           <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
             <Link
               href={`/work/${item.slug}`}
-              className="font-body text-2xl text-ink hover:underline"
+              className="font-medium text-ink hover:underline"
             >
               {item.title}
             </Link>
-            <span className="font-ui text-xs text-muted">{item.category}</span>
+            <span className="text-muted">{item.category}</span>
           </div>
           <p className="mt-3 text-muted leading-relaxed">{item.summary}</p>
           <div className="mt-5 flex flex-wrap gap-3">

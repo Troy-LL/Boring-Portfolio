@@ -32,21 +32,21 @@ export default function WorkDetailPage({ params }: Props) {
           { label: item.title },
         ]}
       />
-      <p className="mt-10 font-ui text-xs text-muted">
+      <p className="mt-10 text-muted">
         {item.category}
       </p>
-      <h1 className="mt-3 font-display italic text-4xl sm:text-5xl text-ink">
+      <h1 className="mt-3 font-medium text-ink">
         {item.title}
       </h1>
-      <p className="mt-6 max-w-measure text-xl text-muted leading-relaxed">
+      <p className="mt-6 max-w-measure text-muted leading-relaxed">
         {item.summary}
       </p>
-      <div className="mt-10 space-y-5 max-w-measure text-lg text-muted leading-relaxed">
+      <div className="mt-10 space-y-5 max-w-measure text-muted leading-relaxed">
         {item.body.map((paragraph) => (
           <p key={paragraph.slice(0, 32)}>{paragraph}</p>
         ))}
       </div>
-      <p className="mt-10 font-ui text-sm text-muted">
+      <p className="mt-10 text-muted">
         {item.tech.join(" · ")}
       </p>
       <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2">

@@ -13,7 +13,7 @@ export default function ResumePage() {
     <main className="mx-auto max-w-page px-6 py-16 sm:py-24">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Resume" }]} />
       <div className="mt-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
-        <h1 className="font-display italic text-4xl sm:text-5xl text-ink">Resume</h1>
+        <h1 className="font-medium text-ink">Resume</h1>
         <TextLink
           href="https://docs.google.com/document/d/1yyjqeEqSVWKLruBkglLBhCLlDdN5OXuWYwKMfIwDzOc/export?format=pdf"
           external

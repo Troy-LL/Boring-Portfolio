@@ -31,12 +31,12 @@ export default function BlogPostPage({ params }: Props) {
           { label: post.title },
         ]}
       />
-      <p className="mt-10 font-ui text-xs text-muted">{post.date}</p>
-      <h1 className="mt-3 font-display italic text-4xl sm:text-5xl text-ink max-w-measure">
+      <p className="mt-10 text-muted">{post.date}</p>
+      <h1 className="mt-3 font-medium text-ink max-w-measure">
         {post.title}
       </h1>
-      <p className="mt-6 max-w-measure text-xl text-muted">{post.dek}</p>
-      <div className="mt-10 space-y-5 max-w-measure text-lg text-muted leading-relaxed">
+      <p className="mt-6 max-w-measure text-muted">{post.dek}</p>
+      <div className="mt-10 space-y-5 max-w-measure text-muted leading-relaxed">
         {post.body.map((paragraph) => (
           <p key={paragraph.slice(0, 32)}>{paragraph}</p>
         ))}

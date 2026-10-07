@@ -14,8 +14,8 @@ export default function TalkPage() {
   return (
     <main className="mx-auto max-w-page px-6 py-16 sm:py-24">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Talk" }]} />
-      <h1 className="mt-8 font-display italic text-4xl sm:text-5xl text-ink">Talk</h1>
-      <p className="mt-6 max-w-measure text-xl text-ink leading-relaxed">
+      <h1 className="mt-8 font-medium text-ink">Talk</h1>
+      <p className="mt-6 max-w-measure text-ink leading-relaxed">
         Work starts with a conversation. Twenty minutes. No pitch deck needed.
       </p>
       <div className="mt-12 flex flex-col sm:flex-row sm:items-center gap-x-6 gap-y-2">
@@ -32,7 +32,7 @@ export default function TalkPage() {
           Or email {SITE.email}
         </TextLink>
       </div>
-      <p className="mt-10 text-sm text-muted max-w-measure">
+      <p className="mt-10 text-muted max-w-measure">
         Booking opens in Google Calendar Appointment schedules. This page stays paper. No widget embed.
       </p>
     </main>

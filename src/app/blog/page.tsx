@@ -10,7 +10,7 @@ export default function BlogIndexPage() {
   return (
     <main className="mx-auto max-w-page px-6 py-16 sm:py-24">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Blog" }]} />
-      <h1 className="mt-8 font-display italic text-4xl sm:text-5xl text-ink mb-4">Blog</h1>
+      <h1 className="mt-8 font-medium text-ink mb-4">Blog</h1>
       <p className="text-muted max-w-measure mb-8">
         Notes on shipping, tools, and the paper site.
       </p>
