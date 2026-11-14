@@ -10,22 +10,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
 @layer base {
   :root {
     --paper: #f2eee8;
@@ -128,9 +112,9 @@
     scroll-behavior: auto;
   }
 
-  *,
-  *::before,
-  *::after {
+  body:not(:has(.card-door)) *,
+  body:not(:has(.card-door)) *::before,
+  body:not(:has(.card-door)) *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
