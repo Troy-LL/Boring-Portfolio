@@ -10,7 +10,7 @@ const NAV = [
 
 export default function Navbar() {
   return (
-    <header>
+    <header data-home-scroll>
       <nav className="mx-auto max-w-page px-6 py-8 flex items-center justify-between">
         <Link href="/" className="font-medium text-ink">
           {SITE.name}
