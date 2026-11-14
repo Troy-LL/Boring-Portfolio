@@ -27,7 +27,13 @@ export function buildStaircase(
   const vw = Math.max(1, Number(viewportWidth) || 0);
   const vh = Math.max(1, Number(viewportHeight) || 0);
   const cornerPx = vw * (opts.cornerVw ?? 1);
-  const handH = vh * 0.7;
+  const handVh =
+    Number.isFinite(Number(opts.handVh)) && Number(opts.handVh) > 0
+      ? Number(opts.handVh)
+      : vw <= 719
+        ? 0.52
+        : 0.7;
+  const handH = vh * handVh;
   const palmW = (174 * handH) / 684;
   const clearPx = palmW + 48;
   const legVh = Math.max(1, Number(opts.legVh) || 3.5);
