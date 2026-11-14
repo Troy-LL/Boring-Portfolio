@@ -192,16 +192,10 @@ export function resetHatchOpening() {
 }
 
 export const HATCH_VIDEO_FORMATS = {
-  mov: {
-    id: "mov",
-    label: "MOV · H.264",
-    src: "assets/IMG_6909.MOV",
-    type: "video/mp4",
-  },
   mp4: {
     id: "mp4",
     label: "MP4 · H.264",
-    src: "assets/hatch/IMG_6909.mp4",
+    src: "/opening/hatch/IMG_6909.mp4",
     type: "video/mp4",
   },
   webm: {
@@ -215,7 +209,7 @@ export const HATCH_VIDEO_FORMATS = {
 export const HATCH_VIDEO = {
   offsetY: 50,
   zoom: 1,
-  format: "webm",
+  format: "mp4",
   vignette: 0.85,
   vignetteSoft: 32,
   vignetteSize: 1.3,
@@ -231,8 +225,32 @@ export function resetHatchVideo() {
   Object.assign(HATCH_VIDEO, HATCH_VIDEO_DEFAULTS);
 }
 
+export function pickHatchVideoFormat(videoEl) {
+  const probe =
+    videoEl instanceof HTMLVideoElement
+      ? videoEl
+      : typeof document !== "undefined"
+        ? document.createElement("video")
+        : null;
+  const can = (type) => {
+    if (!probe || typeof probe.canPlayType !== "function") return false;
+    const rank = probe.canPlayType(type);
+    return rank === "probably" || rank === "maybe";
+  };
+  if (can(HATCH_VIDEO_FORMATS.mp4.type)) return "mp4";
+  if (can(HATCH_VIDEO_FORMATS.webm.type)) return "webm";
+  return "mp4";
+}
+
 export function hatchVideoSource(format = HATCH_VIDEO.format) {
-  return HATCH_VIDEO_FORMATS[format] ?? HATCH_VIDEO_FORMATS[HATCH_VIDEO_DEFAULTS.format];
+  const preferred = format in HATCH_VIDEO_FORMATS ? format : HATCH_VIDEO_DEFAULTS.format;
+  const source = HATCH_VIDEO_FORMATS[preferred];
+  if (typeof document === "undefined") return source;
+  const probe = document.createElement("video");
+  const rank =
+    typeof probe.canPlayType === "function" ? probe.canPlayType(source.type) : "";
+  if (rank === "probably" || rank === "maybe") return source;
+  return HATCH_VIDEO_FORMATS[pickHatchVideoFormat(probe)];
 }
 
 export function formatByteSize(bytes) {

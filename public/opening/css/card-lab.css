@@ -1,5 +1,5 @@
 .card-door {
-  --paper: #f2eee8;
+  --paper: #e8e6e0;
   --ink: #1a1814;
   --amber: #c9a36a;
   --floor: #e4dfd4;
@@ -182,7 +182,7 @@ body.is-lab .site-stage {
 .pane {
   position: relative;
   flex: 1;
-  background: transparent;
+  background: var(--floor);
   min-height: 100%;
   overflow: hidden;
 }
@@ -230,11 +230,11 @@ body.is-lab .pane-fps {
   z-index: 2;
   width: 100%;
   height: 100%;
-  background: #f2eee8;
+  background: var(--floor);
 }
 
 .horizon-hand {
-  --hand-h: 70vh;
+  --hand-h: 70%;
   --hand-unit: calc(var(--hand-h) / 684);
   --hand-front-w: calc(310 * var(--hand-unit));
   --hand-back-w: calc(174 * var(--hand-unit));
@@ -260,7 +260,7 @@ body.is-lab .pane-fps {
 }
 
 .horizon-hand--back {
-  top: calc(50vh - var(--hand-h) / 2);
+  top: calc(50% - var(--hand-h) / 2);
   left: calc(-1 * var(--hand-seam-overlap));
   width: calc(var(--hand-back-w) + var(--hand-seam-overlap));
   height: var(--hand-back-h);
@@ -281,7 +281,8 @@ body.is-lab .pane-fps {
 .horizon-hand--front .horizon-hand__img {
   width: var(--hand-front-w);
   height: var(--hand-h);
-  filter: drop-shadow(-12px 16px 18px rgba(26, 24, 20, 0.2));
+  filter: saturate(0.85) brightness(0.97) contrast(1.04)
+    drop-shadow(-12px 16px 18px rgba(26, 24, 20, 0.2));
 }
 
 .css-stage.is-lite .horizon-hand--front .horizon-hand__img {
@@ -296,11 +297,7 @@ body.is-lab .pane-fps {
 
 @media (max-width: 719px) {
   .horizon-hand {
-    --hand-h: 52vh;
-  }
-
-  .horizon-hand--front .horizon-hand__img {
-    filter: none;
+    display: none;
   }
 }
 

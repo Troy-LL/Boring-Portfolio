@@ -510,7 +510,7 @@ function createCssEngine(root, materials, opts = {}) {
     }
     const video = hatchWell.querySelector(".css-hatch-video");
     if (!video) return;
-    const source = hatchVideoSource();
+    const source = hatchVideoSource(HATCH_VIDEO.format);
     let tag = video.querySelector("source");
     if (!tag) {
       tag = document.createElement("source");
@@ -522,6 +522,9 @@ function createCssEngine(root, materials, opts = {}) {
       tag.src = source.src;
       tag.type = source.type;
       video.load();
+    }
+    if (source.id !== HATCH_VIDEO.format) {
+      setHatchVideo({ format: source.id });
     }
     video.play?.()?.catch(() => {});
     hatchVideoReady = true;
