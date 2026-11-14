@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { POSTS } from "@/lib/posts";
+import { formatDisplayDate } from "@/lib/utils";
 
 export default function BlogList() {
   const posts = [...POSTS].sort((a, b) => b.date.localeCompare(a.date));
@@ -8,7 +9,7 @@ export default function BlogList() {
     <ul className="border-t border-hairline">
       {posts.map((post) => (
         <li key={post.slug} className="border-b border-hairline py-6">
-          <p className="text-muted">{post.date}</p>
+          <p className="text-muted">{formatDisplayDate(post.date)}</p>
           <h2 className="mt-2">
             <Link
               href={`/blog/${post.slug}`}

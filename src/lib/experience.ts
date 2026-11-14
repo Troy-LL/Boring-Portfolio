@@ -13,7 +13,23 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Aug 2026 – Present",
     startDate: "2026-08-01",
     description:
-      "Owns engineering on chapter public sites: asesmanila.com (Vite/React/Tailwind on Cloudflare) and Build with ASES (Next.js), including deploys and live fixes. Ships SEO basics (sitemap, robots, meta) and iterates with design and chapter leadership until live pages match the org. Previously University Lead – PUP Manila (Jan–Aug 2026).",
+      "Builds and ships chapter sites: asesmanila.com and Build with ASES. Owns deploys, SEO basics, and live fixes with design and leadership. Previously University Lead – PUP Manila.",
+  },
+  {
+    company: "ED3N Ventures",
+    role: "Software Engineer Intern",
+    period: "Jul 2026 – Aug 2026",
+    startDate: "2026-07-01",
+    description:
+      "Built a RAG path over multimodal business data for a chatbot with a teammate. Shipped a Composio automation layer with system and RBAC prompts, plus dashboards for chart-led decisions. Hybrid, Manila.",
+  },
+  {
+    company: "GDG on Campus – PUP Manila",
+    role: "Talent Development Lead",
+    period: "Jan 2026 – Aug 2026",
+    startDate: "2026-01-01",
+    description:
+      "Ran member growth and skill-tracking programs. Previously Co-Lead, Associate, and Data and ML Cadet.",
   },
   {
     company: "Seekers Guild",
@@ -32,28 +48,12 @@ export const EXPERIENCE: ExperienceItem[] = [
       "Scholarship for SQL, Python, and AI coursework. Ranked 1st on the department DataCamp leaderboard for four consecutive months.",
   },
   {
-    company: "ED3N Ventures",
-    role: "Software Engineer Intern",
-    period: "Jul 2026 – Aug 2026",
-    startDate: "2026-07-01",
-    description:
-      "With a teammate, built a RAG path over multimodal business data for a chatbot. Helped ship a Composio automation layer steered with system and RBAC prompts. Built simple dashboards so the team could decide from charts, not only chat. Hybrid, Manila.",
-  },
-  {
     company: "FlyRank AI",
     role: "Backend AI Engineer Intern",
     period: "Jun 2026 – Sep 2026",
     startDate: "2026-06-01",
     description:
-      "Learning-focused internship studying Backend AI materials and curriculum rather than shipping production features. Remote, Philippines.",
-  },
-  {
-    company: "GDG on Campus – PUP Manila",
-    role: "Talent Development Lead",
-    period: "Jan 2026 – Aug 2026",
-    startDate: "2026-01-01",
-    description:
-      "Designed member growth programs, skill tracking, and leadership opportunities. Previously Co-Lead (Sep 2025–Jan 2026), Associate (Nov 2024–Aug 2025), and Data and ML Cadet (Nov 2024–2025).",
+      "Learning-focused internship on Backend AI materials and curriculum. Did not ship production features. Remote, Philippines.",
   },
   {
     company: "DOST–PAGASA",
@@ -61,6 +61,6 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Apr 2023 – May 2023",
     startDate: "2023-04-01",
     description:
-      "Science Garden, Diliman. Helped calibrate humidity and temperature instruments for product validation; rotated through forecasting teams on station data and instruments.",
+      "Science Garden, Diliman. Helped calibrate humidity and temperature instruments; rotated through forecasting teams on station data.",
   },
 ];

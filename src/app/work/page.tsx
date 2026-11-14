@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { WORK } from "@/lib/work";
+import { getWorkList } from "@/lib/work";
 import WorkList from "@/components/WorkList";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function WorkIndexPage() {
       <p className="text-muted max-w-measure mb-8">
         Shortlist that survives a harsh bar. Proof links. No costume.
       </p>
-      <WorkList items={WORK} />
+      <WorkList items={getWorkList()} />
     </main>
   );
 }

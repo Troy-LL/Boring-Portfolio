@@ -24,17 +24,21 @@ export default function TalkPage() {
             Pick a time
           </TextLink>
         ) : (
-          <span className="text-muted" title="Set NEXT_PUBLIC_BOOKING_URL">
-            Scheduling link coming soon
-          </span>
+          <TextLink href={`mailto:${SITE.email}?subject=Conversation`}>
+            Email {SITE.email}
+          </TextLink>
         )}
-        <TextLink href={`mailto:${SITE.email}?subject=Conversation`}>
-          Or email {SITE.email}
-        </TextLink>
+        {bookingUrl ? (
+          <TextLink href={`mailto:${SITE.email}?subject=Conversation`}>
+            Or email {SITE.email}
+          </TextLink>
+        ) : null}
       </div>
-      <p className="mt-10 text-muted max-w-measure">
-        Booking opens in Google Calendar Appointment schedules. This page stays paper. No widget embed.
-      </p>
+      {bookingUrl ? (
+        <p className="mt-10 text-muted max-w-measure">
+          Opens Google Calendar in a new tab.
+        </p>
+      ) : null}
     </main>
   );
 }
