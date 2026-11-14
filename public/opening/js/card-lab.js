@@ -978,12 +978,13 @@ function boot() {
     const saveData = connection?.saveData === true;
     const slowNet =
       typeof connection?.effectiveType === "string" &&
-      /^(slow-2g|2g|3g)$/.test(connection.effectiveType);
-    const fewCores = (navigator.hardwareConcurrency || 8) <= 4;
+      /^(slow-2g|2g)$/.test(connection.effectiveType);
+    const lowMem =
+      typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 2;
     return (
       saveData ||
       slowNet ||
-      fewCores ||
+      lowMem ||
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     );
   }
@@ -1057,22 +1058,14 @@ function boot() {
 
   function measureDoorViewport() {
     const door = document.querySelector("[data-card-door]");
-    const widths = [
-      window.visualViewport?.width,
-      window.innerWidth,
-      door instanceof HTMLElement ? door.clientWidth : 0,
-      cssRoot?.clientWidth,
-    ].filter((n) => Number(n) > 0);
-    const heights = [
-      window.visualViewport?.height,
-      window.innerHeight,
-      door instanceof HTMLElement ? door.clientHeight : 0,
-      cssRoot?.clientHeight,
-    ].filter((n) => Number(n) > 0);
-    return {
-      w: Math.max(1, Math.round(Math.min(...widths))),
-      h: Math.max(1, Math.round(Math.min(...heights))),
-    };
+    const doorW = door instanceof HTMLElement ? door.clientWidth : 0;
+    const doorH = door instanceof HTMLElement ? door.clientHeight : 0;
+    if (doorW > 0 && doorH > 0) {
+      return { w: Math.round(doorW), h: Math.round(doorH) };
+    }
+    const w = window.visualViewport?.width || window.innerWidth || 1;
+    const h = window.visualViewport?.height || window.innerHeight || 1;
+    return { w: Math.max(1, Math.round(w)), h: Math.max(1, Math.round(h)) };
   }
 
   function syncStaircase() {
@@ -1106,12 +1099,28 @@ function boot() {
     window.cancelAnimationFrame(frameClock);
     frameClock = 0;
     window.removeEventListener("wheel", onWheel);
+    if (window.__boringDoorTouch) {
+      const touch = window.__boringDoorTouch;
+      window.removeEventListener("touchstart", touch.start);
+      window.removeEventListener("touchmove", touch.move);
+      window.removeEventListener("touchend", touch.end);
+      window.removeEventListener("touchcancel", touch.end);
+      delete window.__boringDoorTouch;
+    }
     document.body.style.overflow = "";
     document.querySelectorAll("[data-home-scroll]").forEach((el) => {
       if (el instanceof HTMLElement) el.style.transform = "";
     });
     window.dispatchEvent(new CustomEvent("card-door:enter"));
   }
+
+  window.addEventListener(
+    "card-door:abort",
+    () => {
+      releaseDoor();
+    },
+    { once: true },
+  );
 
   const siteNavEl = document.querySelector("[data-site-nav]");
   const siteNavLabels = document.querySelector("[data-site-nav-labels]");
@@ -2007,7 +2016,6 @@ function boot() {
   };
   window.addEventListener("resize", onViewportChange);
   window.visualViewport?.addEventListener("resize", onViewportChange);
-  window.visualViewport?.addEventListener("scroll", onViewportChange);
   if (startDebug || prefersReducedMotion()) {
     phase = "settled";
     css.setInteractive(true);

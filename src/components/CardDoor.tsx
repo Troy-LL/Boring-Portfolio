@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 const SEEN_KEY = "boring-card-door";
-const SCRIPT_SRC = "/opening/js/card-lab.js?v=8";
+const SCRIPT_SRC = "/opening/js/card-lab.js?v=9";
 const FAILSAFE_MS = 5000;
 const SHEETS = [
   "/opening/css/Card.css",
@@ -31,6 +31,31 @@ const DOOR_COVER = `
 }
 `;
 
+type BoringDoorWindow = Window & {
+  __boringDoorWheel?: EventListener;
+  __boringDoorTouch?: {
+    start: EventListener;
+    move: EventListener;
+    end: EventListener;
+  };
+};
+
+function clearDoorListeners() {
+  const win = window as BoringDoorWindow;
+  if (win.__boringDoorWheel) {
+    window.removeEventListener("wheel", win.__boringDoorWheel);
+    delete win.__boringDoorWheel;
+  }
+  if (win.__boringDoorTouch) {
+    const touch = win.__boringDoorTouch;
+    window.removeEventListener("touchstart", touch.start);
+    window.removeEventListener("touchmove", touch.move);
+    window.removeEventListener("touchend", touch.end);
+    window.removeEventListener("touchcancel", touch.end);
+    delete win.__boringDoorTouch;
+  }
+}
+
 export default function CardDoor() {
   const [open, setOpen] = useState(true);
   const [portal, setPortal] = useState(false);
@@ -38,11 +63,25 @@ export default function CardDoor() {
   const [armed, setArmed] = useState(false);
   const loadedRef = useRef(new Set<string>());
   const armedRef = useRef(false);
+  const enteredRef = useRef(false);
   const live = cssReady && armed;
 
   const markSheet = (href: string) => {
     loadedRef.current.add(href);
     if (loadedRef.current.size >= SHEETS.length) setCssReady(true);
+  };
+
+  const finish = () => {
+    if (enteredRef.current) return;
+    enteredRef.current = true;
+    sessionStorage.setItem(SEEN_KEY, "1");
+    window.dispatchEvent(new CustomEvent("card-door:abort"));
+    document.querySelectorAll("[data-home-scroll]").forEach((el) => {
+      if (el instanceof HTMLElement) el.style.transform = "";
+    });
+    clearDoorListeners();
+    document.body.style.overflow = "";
+    setOpen(false);
   };
 
   useLayoutEffect(() => {
@@ -72,10 +111,17 @@ export default function CardDoor() {
   }, [open]);
 
   useEffect(() => {
+    if (!open) return;
+    const coverFailSafe = window.setTimeout(() => {
+      if (!armedRef.current) finish();
+    }, FAILSAFE_MS);
+    return () => window.clearTimeout(coverFailSafe);
+  }, [open]);
+
+  useEffect(() => {
     if (!open || !cssReady) return;
 
     let script: HTMLScriptElement | null = null;
-    let entered = false;
     const timer = window.setTimeout(() => {
       script = document.createElement("script");
       script.type = "module";
@@ -83,63 +129,19 @@ export default function CardDoor() {
       document.body.appendChild(script);
     }, 0);
 
-    const finish = () => {
-      if (entered) return;
-      entered = true;
-      sessionStorage.setItem(SEEN_KEY, "1");
-      document.querySelectorAll("[data-home-scroll]").forEach((el) => {
-        if (el instanceof HTMLElement) el.style.transform = "";
-      });
-      setOpen(false);
-    };
-
     const onArmed = () => {
       armedRef.current = true;
       setArmed(true);
     };
-    const failSafe = window.setTimeout(() => {
-      if (!armedRef.current) finish();
-    }, FAILSAFE_MS);
 
     window.addEventListener("card-door:enter", finish);
     window.addEventListener("card-door:armed", onArmed);
     return () => {
       window.clearTimeout(timer);
-      window.clearTimeout(failSafe);
       window.removeEventListener("card-door:enter", finish);
       window.removeEventListener("card-door:armed", onArmed);
       script?.remove();
-      const wheel = (window as Window & { __boringDoorWheel?: EventListener })
-        .__boringDoorWheel;
-      if (wheel) {
-        window.removeEventListener("wheel", wheel);
-        delete (window as Window & { __boringDoorWheel?: EventListener })
-          .__boringDoorWheel;
-      }
-      const touch = (
-        window as Window & {
-          __boringDoorTouch?: {
-            start: EventListener;
-            move: EventListener;
-            end: EventListener;
-          };
-        }
-      ).__boringDoorTouch;
-      if (touch) {
-        window.removeEventListener("touchstart", touch.start);
-        window.removeEventListener("touchmove", touch.move);
-        window.removeEventListener("touchend", touch.end);
-        window.removeEventListener("touchcancel", touch.end);
-        delete (
-          window as Window & {
-            __boringDoorTouch?: {
-              start: EventListener;
-              move: EventListener;
-              end: EventListener;
-            };
-          }
-        ).__boringDoorTouch;
-      }
+      clearDoorListeners();
       document.body.style.overflow = "";
     };
   }, [open, cssReady]);
@@ -155,6 +157,7 @@ export default function CardDoor() {
           rel="stylesheet"
           href={href}
           onLoad={() => markSheet(href)}
+          onError={() => markSheet(href)}
         />
       ))}
       <div
