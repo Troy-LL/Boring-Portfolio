@@ -19,4 +19,4 @@ Set `NEXT_PUBLIC_BOOKING_URL` to your Google Calendar Appointment schedule link 
 
 ## Brand
 
-Look and voice come from `personal/docs/branding.md`. Local notes in `docs/design.md`.
+Look and voice come from `personal/docs/branding.md`. Local notes in `docs/design.md`. Impeccable lives in `.cursor/skills/impeccable` with `PRODUCT.md` at the root.
