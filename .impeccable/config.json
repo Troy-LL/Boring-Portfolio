@@ -1,0 +1,28 @@
+{
+  "detector": {
+    "ignoreRules": [
+      "italic-serif-display"
+    ],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "src/app/globals.css"
+        ],
+        "createdAt": "2026-11-14T15:32:37.615Z",
+        "reason": "Brand dirty white paper"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "tailwind.config.ts"
+        ],
+        "createdAt": "2026-11-14T15:32:40.140Z",
+        "reason": "Brand dirty white paper"
+      }
+    ]
+  }
+}
