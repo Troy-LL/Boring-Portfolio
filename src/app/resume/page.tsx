@@ -21,7 +21,7 @@ export default function ResumePage() {
           Download PDF
         </TextLink>
       </div>
-      <div className="w-full bg-beige p-3 sm:p-4 min-h-[75vh] overflow-hidden">
+      <div className="w-full bg-sheet p-3 sm:p-4 min-h-[75vh] overflow-hidden">
         <ResumeEmbed className="min-h-[75vh]" />
       </div>
     </main>

@@ -8,7 +8,7 @@ const title = `${SITE.name} | Portfolio`;
 const description = `${SITE.role}. ${SITE.positioning} ${SITE.location}.`;
 
 export const viewport: Viewport = {
-  themeColor: "#FFFFFF",
+  themeColor: "#F2EEE8",
 };
 
 export const metadata: Metadata = {
