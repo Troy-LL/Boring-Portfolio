@@ -4,12 +4,12 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 const SEEN_KEY = "boring-card-door";
-const SCRIPT_SRC = "/opening/js/card-lab.js?v=10";
+const SCRIPT_SRC = "/opening/js/card-lab.js?v=11";
 const FAILSAFE_MS = 5000;
 const SHEETS = [
-  "/opening/css/Card.css?v=10",
-  "/opening/css/card-back-fonts.css?v=10",
-  "/opening/css/card-lab.css?v=10",
+  "/opening/css/Card.css?v=11",
+  "/opening/css/card-back-fonts.css?v=11",
+  "/opening/css/card-lab.css?v=11",
 ];
 const DOOR_COVER = `
 .card-door {

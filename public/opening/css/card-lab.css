@@ -117,7 +117,7 @@ body.is-lab .site-stage {
   align-items: center;
 }
 
-.card-door button {
+.card-door button:not(.physical-card__ink) {
   appearance: none;
   border: 1px solid rgba(20, 18, 16, 0.22);
   background: #f4f2ea;
@@ -128,16 +128,16 @@ body.is-lab .site-stage {
   cursor: pointer;
 }
 
-.card-door button:hover {
+.card-door button:not(.physical-card__ink):hover {
   border-color: var(--ink);
 }
 
-.card-door button.is-active {
+.card-door button:not(.physical-card__ink).is-active {
   border-color: var(--ink);
   background: #faf9f5;
 }
 
-.card-door button:focus-visible {
+.card-door button:not(.physical-card__ink):focus-visible {
   outline: 2px solid var(--amber);
   outline-offset: 2px;
 }
