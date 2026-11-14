@@ -30,7 +30,6 @@ export const WORK: WorkItem[] = [
     links: [
       { label: "GitHub", href: "https://github.com/Troy-LL/iris-troy" },
     ],
-    featured: true,
   },
   {
     slug: "editlayer",
@@ -39,8 +38,7 @@ export const WORK: WorkItem[] = [
       "Drop-in visual editor for a React app. Layout is JSON. A person can drag it. A model can write the same file.",
     body: [
       "EditLayer turns a running React app into a shared design surface. Toggle edit, drag and restyle, save layout JSON, and work with an agent over MCP on the same elements.",
-      "Overlay handles are still in comparison. Flex and grid nesting still fail in places. The README says that out loud.",
-      "Flagship product craft for the paper portfolio. A short clip belongs on this page when one exists.",
+      "Overlay handles are still in comparison. Flex and grid nesting still fail in places. The README says that out loud. A short clip belongs here when one exists.",
     ],
     category: "Product",
     tech: ["React", "Vite", "TypeScript", "MCP"],
@@ -100,6 +98,7 @@ export const WORK: WorkItem[] = [
       { label: "Live", href: "https://openreach.niched.tech" },
       { label: "GitHub", href: "https://github.com/Troy-LL/OpenReach" },
     ],
+    featured: true,
   },
   {
     slug: "ai-compacting",
@@ -149,8 +148,19 @@ export const WORK: WorkItem[] = [
   },
 ];
 
+const HOME_WORK = ["pupsync", "editlayer", "openreach"] as const;
+
 export function getFeaturedWork(): WorkItem[] {
-  return WORK.filter((item) => item.featured);
+  return HOME_WORK.flatMap((slug) => {
+    const item = WORK.find((entry) => entry.slug === slug);
+    return item ? [item] : [];
+  });
+}
+
+export function getWorkList(): WorkItem[] {
+  const featured = getFeaturedWork();
+  const slugs = new Set(featured.map((item) => item.slug));
+  return [...featured, ...WORK.filter((item) => !slugs.has(item.slug))];
 }
 
 export function getWorkBySlug(slug: string): WorkItem | undefined {

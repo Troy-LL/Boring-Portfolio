@@ -4,7 +4,7 @@ export const SITE = {
   url: "https://www.troylazaro.dev",
   email: "troylazaro09@gmail.com",
   role: "AI engineer & builder",
-  positioning: "I build with AI, break it, fix it, and ship it.",
+  positioning: "I make things. I care how they look and how they work.",
   motto: "Life’s too short to be boring.",
   location: "Manila, Philippines",
   github: "https://github.com/Troy-LL",

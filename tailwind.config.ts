@@ -9,17 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        paper: "#FFFFFF",
-        beige: "#F2EEE8",
-        ink: "#1A1816",
+        paper: "#F2EEE8",
+        sheet: "#FFFFFF",
+        ink: "#141210",
         muted: "#6F6A64",
-        hairline: "#ECEAE6",
+        hairline: "#E4DFD8",
       },
       fontFamily: {
-        display: ["Boska", "Georgia", "serif"],
-        body: ["Gambetta", "Georgia", "serif"],
         ui: ["Switzer", "system-ui", "sans-serif"],
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["Switzer", "system-ui", "sans-serif"],
       },
       maxWidth: {
         measure: "42rem",

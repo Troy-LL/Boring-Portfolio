@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { POSTS, getPostBySlug } from "@/lib/posts";
+import { formatDisplayDate } from "@/lib/utils";
 
 type Props = { params: { slug: string } };
 
@@ -31,7 +32,7 @@ export default function BlogPostPage({ params }: Props) {
           { label: post.title },
         ]}
       />
-      <p className="mt-10 text-muted">{post.date}</p>
+      <p className="mt-10 text-muted">{formatDisplayDate(post.date)}</p>
       <h1 className="mt-3 font-medium text-ink max-w-measure">
         {post.title}
       </h1>

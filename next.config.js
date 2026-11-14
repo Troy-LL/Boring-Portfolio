@@ -4,6 +4,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      { source: "/book", destination: "/talk", permanent: false },
+    ];
+  },
   async headers() {
     return [
       {
@@ -24,10 +29,6 @@ const nextConfig = {
           {
             key: 'X-XSS-Protection',
             value: '1; mode=block',
-          },
-          {
-            key: 'Content-Security-Policy',
-            value: "require-trusted-types-for 'script';",
           },
         ],
       },

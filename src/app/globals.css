@@ -3,54 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Boska";
-  src: url("/fonts/Boska-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Boska";
-  src: url("/fonts/Boska-Italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Gambetta";
-  src: url("/fonts/Gambetta-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Gambetta";
-  src: url("/fonts/Gambetta-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Gambetta";
-  src: url("/fonts/Gambetta-Italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Switzer";
-  src: url("/fonts/Switzer-Light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "Switzer";
   src: url("/fonts/Switzer-Regular.woff2") format("woff2");
   font-weight: 400;
@@ -76,11 +28,11 @@
 
 @layer base {
   :root {
-    --paper: #ffffff;
-    --beige: #f2eee8;
-    --ink: #1a1816;
+    --paper: #f2eee8;
+    --sheet: #ffffff;
+    --ink: #141210;
     --muted: #6f6a64;
-    --hairline: #eceae6;
+    --hairline: #e4dfd8;
     --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
     --duration-apple: 420ms;
   }
@@ -92,7 +44,7 @@
 
   body {
     @apply bg-paper text-ink antialiased;
-    font-family: "Inter", system-ui, sans-serif;
+    font-family: "Switzer", system-ui, sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 1.65;
@@ -122,16 +74,12 @@
 }
 
 @layer utilities {
-  .font-display {
-    font-family: "Boska", Georgia, serif;
-  }
-
   .font-ui {
     font-family: "Switzer", system-ui, sans-serif;
   }
 
-  .font-body {
-    font-family: "Gambetta", Georgia, serif;
+  .font-medium {
+    letter-spacing: -0.02em;
   }
 
   .font-medium {
@@ -164,7 +112,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e4e1dc;
+  background: #d9d2c8;
   border: 3px solid var(--paper);
   border-radius: 100px;
   transition: background-color var(--duration-apple) var(--ease-apple);
@@ -172,7 +120,7 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #e4e1dc var(--paper);
+  scrollbar-color: #d9d2c8 var(--paper);
 }
 
 @media (prefers-reduced-motion: reduce) {

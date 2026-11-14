@@ -3,7 +3,7 @@ import TextLink from "@/components/TextLink";
 
 export default function Footer() {
   return (
-    <footer className="mt-24 border-t border-hairline">
+    <footer data-home-scroll className="mt-24 border-t border-hairline">
       <div className="mx-auto max-w-page px-6 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
         <p className="text-muted">{SITE.motto}</p>
         <nav aria-label="Footer" className="flex flex-wrap items-center gap-5 sm:gap-6">

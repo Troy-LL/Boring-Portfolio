@@ -12,8 +12,8 @@ export const shareSize = {
 
 export const shareContentType = "image/png";
 
-const paper = "#FFFFFF";
-const ink = "#1A1816";
+const paper = "#F2EEE8";
+const ink = "#141210";
 const muted = "#6F6A64";
 
 async function font(file: string) {
@@ -21,11 +21,7 @@ async function font(file: string) {
 }
 
 export async function shareCard() {
-  const [boska, gambetta, switzer] = await Promise.all([
-    font("Boska-Italic.ttf"),
-    font("Gambetta-Regular.ttf"),
-    font("Switzer-Regular.ttf"),
-  ]);
+  const switzer = await font("Switzer-Regular.ttf");
   const host = new URL(SITE.url).host;
 
   return new ImageResponse(
@@ -45,7 +41,7 @@ export async function shareCard() {
         <div
           style={{
             display: "flex",
-            fontFamily: "Boska",
+            fontFamily: "Switzer",
             fontSize: 92,
             lineHeight: 1,
             letterSpacing: "-0.03em",
@@ -57,7 +53,7 @@ export async function shareCard() {
           style={{
             display: "flex",
             marginTop: 28,
-            fontFamily: "Gambetta",
+            fontFamily: "Switzer",
             fontSize: 28,
             color: muted,
           }}
@@ -69,7 +65,7 @@ export async function shareCard() {
             display: "flex",
             marginTop: 22,
             maxWidth: 860,
-            fontFamily: "Gambetta",
+            fontFamily: "Switzer",
             fontSize: 36,
             lineHeight: 1.35,
           }}
@@ -91,11 +87,7 @@ export async function shareCard() {
     ),
     {
       ...shareSize,
-      fonts: [
-        { name: "Boska", data: boska, style: "normal", weight: 400 },
-        { name: "Gambetta", data: gambetta, style: "normal", weight: 400 },
-        { name: "Switzer", data: switzer, style: "normal", weight: 400 },
-      ],
+      fonts: [{ name: "Switzer", data: switzer, style: "normal", weight: 400 }],
     }
   );
 }
