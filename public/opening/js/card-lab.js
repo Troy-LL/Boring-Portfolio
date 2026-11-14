@@ -470,7 +470,8 @@ function createFps(el) {
   };
 }
 
-function createCssEngine(root, materials) {
+function createCssEngine(root, materials, opts = {}) {
+  const skipHatchVideo = opts.skipHatchVideo === true;
   const pane = root.closest(".pane");
   const rig = root.querySelector(".css-rig");
   const card = root.querySelector(".css-card");
@@ -499,6 +500,8 @@ function createCssEngine(root, materials) {
     }
   }
 
+  let hatchVideoReady = false;
+
   function applyHatchVideo() {
     if (!hatchWell) return;
     const vars = hatchVideoVars();
@@ -508,21 +511,28 @@ function createCssEngine(root, materials) {
     const video = hatchWell.querySelector(".css-hatch-video");
     if (!video) return;
     const source = hatchVideoSource();
-    const tag = video.querySelector("source");
-    const currentSrc = tag?.getAttribute("src") || "";
+    let tag = video.querySelector("source");
+    if (!tag) {
+      tag = document.createElement("source");
+      video.appendChild(tag);
+    }
+    const currentSrc = tag.getAttribute("src") || "";
     if (currentSrc !== source.src) {
       video.pause();
-      if (tag) {
-        tag.src = source.src;
-        tag.type = source.type;
-      }
+      tag.src = source.src;
+      tag.type = source.type;
       video.load();
     }
     video.play?.()?.catch(() => {});
+    hatchVideoReady = true;
+  }
+
+  function ensureHatchVideo() {
+    if (hatchVideoReady || skipHatchVideo) return;
+    applyHatchVideo();
   }
 
   applyLayerZ();
-  applyHatchVideo();
   applyOpening(0);
 
   function applyOpening(fold) {
@@ -538,8 +548,11 @@ function createCssEngine(root, materials) {
       hatchWell.style.clipPath = "inset(100% 0 0 0)";
       hatchCover.style.transform = "none";
       hatchCover.style.setProperty("--hatch-open", "0");
+      const video = hatchWell.querySelector(".css-hatch-video");
+      if (video && !video.paused) video.pause();
       return;
     }
+    ensureHatchVideo();
     hatchWell.style.opacity = String(HATCH_OPENING.wellOpacity * peel.shiftPct);
     hatchWell.style.clipPath = `inset(${peel.topPct * 100}% 0 0 0)`;
     hatchCover.style.transform = `translate3d(0, ${-peel.shiftPct * 100}%, 0)`;
@@ -960,12 +973,30 @@ function boot() {
   applyHatchVideoPrefs(savedPrefs);
   applyFlipPrefs(savedPrefs);
 
+  function doorLite() {
+    const connection = navigator.connection;
+    const saveData = connection?.saveData === true;
+    const slowNet =
+      typeof connection?.effectiveType === "string" &&
+      /^(slow-2g|2g|3g)$/.test(connection.effectiveType);
+    const fewCores = (navigator.hardwareConcurrency || 8) <= 4;
+    return (
+      saveData ||
+      slowNet ||
+      fewCores ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+  }
+
+  const lite = doorLite();
+  const mapSize = lite ? 256 : 512;
+
   const materials = hosts.map((host, i) =>
     mountPhysicalCard(host, {
       hideContactShadow: true,
       showPrint: !host.hasAttribute("data-card-back"),
       filterId: `lab-css-ink-${i}`,
-      mapSize: 512,
+      mapSize,
       stock: {
         paperBase: mat.paperBase,
         litOpacity: mat.litOpacity,
@@ -975,9 +1006,9 @@ function boot() {
       },
       ink: {
         density: mat.density,
-        grain: mat.grain,
-        absorption: mat.absorption,
-        relief: mat.relief,
+        grain: lite ? 0 : mat.grain,
+        absorption: lite ? 0 : mat.absorption,
+        relief: lite ? 0 : mat.relief,
       },
       typeScale: mat.typeScale,
       inkColor: mat.inkColor,
@@ -986,21 +1017,25 @@ function boot() {
     }),
   );
 
-  const css = createCssEngine(cssRoot, materials);
+  const css = createCssEngine(cssRoot, materials, {
+    skipHatchVideo: lite,
+  });
   css.setLitBase(mat.litOpacity);
   if (cssRoot) {
     cssRoot.style.setProperty("--lab-card-w", `${mat.cardWidth}px`);
     cssRoot.style.setProperty("--paper-base", mat.paperBase);
+    cssRoot.classList.toggle("is-lite", lite);
   }
 
   let phase = "falling";
   let phaseStart = performance.now();
-  let textEffects =
-    savedPrefs?.textEffects === true ||
-    mat.grain > 0.02 ||
-    mat.absorption > 0.02 ||
-    mat.relief > 0.02;
-  let paperGrain = savedPrefs?.paperGrain !== false;
+  let textEffects = lite
+    ? false
+    : savedPrefs?.textEffects === true ||
+      mat.grain > 0.02 ||
+      mat.absorption > 0.02 ||
+      mat.relief > 0.02;
+  let paperGrain = lite ? false : savedPrefs?.paperGrain !== false;
   let foldTarget = 0;
   let foldDisplay = 0;
   let foldPhase = "idle";
@@ -1009,6 +1044,7 @@ function boot() {
   let pathTarget = 0;
   let pathDisplay = 0;
   let doorEntered = false;
+  let frameClock = 0;
   let flipTarget = 0;
   let flipDisplay = 0;
   let pendingFoldDelta = 0;
@@ -1019,9 +1055,30 @@ function boot() {
   const startDebug = params.has("debug");
   const startLab = params.has("lab") || startDebug;
 
+  function measureDoorViewport() {
+    const door = document.querySelector("[data-card-door]");
+    const widths = [
+      window.visualViewport?.width,
+      window.innerWidth,
+      door instanceof HTMLElement ? door.clientWidth : 0,
+      cssRoot?.clientWidth,
+    ].filter((n) => Number(n) > 0);
+    const heights = [
+      window.visualViewport?.height,
+      window.innerHeight,
+      door instanceof HTMLElement ? door.clientHeight : 0,
+      cssRoot?.clientHeight,
+    ].filter((n) => Number(n) > 0);
+    return {
+      w: Math.max(1, Math.round(Math.min(...widths))),
+      h: Math.max(1, Math.round(Math.min(...heights))),
+    };
+  }
+
   function syncStaircase() {
     if (!cssRoot) return null;
-    staircase = buildStaircase(cssRoot.clientWidth, cssRoot.clientHeight);
+    const { w, h } = measureDoorViewport();
+    staircase = buildStaircase(w, h);
     if (horizonTrack) applyStaircaseLayout(horizonTrack, staircase);
     return staircase;
   }
@@ -1046,6 +1103,8 @@ function boot() {
   function releaseDoor() {
     if (doorEntered) return;
     doorEntered = true;
+    window.cancelAnimationFrame(frameClock);
+    frameClock = 0;
     window.removeEventListener("wheel", onWheel);
     document.body.style.overflow = "";
     document.querySelectorAll("[data-home-scroll]").forEach((el) => {
@@ -1680,13 +1739,14 @@ function boot() {
 
   function pushHorizon(pixels) {
     if (!cssRoot || doorEntered) return;
+    const view = measureDoorViewport();
     const next = advanceHorizon({
       fold: 1,
       hold: holdTarget,
       path: pathTarget,
       deltaPx: pixels,
-      viewportHeight: cssRoot.clientHeight,
-      viewportWidth: cssRoot.clientWidth,
+      viewportHeight: view.h,
+      viewportWidth: view.w,
     });
     if (next.kind === "fold") return;
     holdTarget = next.hold;
@@ -1779,9 +1839,58 @@ function boot() {
   window.__boringDoorWheel = onWheel;
   window.addEventListener("wheel", onWheel, { passive: false });
 
+  let touchY = null;
+  const onTouchStart = (e) => {
+    if (doorEntered || !e.touches?.length) return;
+    touchY = e.touches[0].clientY;
+  };
+  const onTouchMove = (e) => {
+    if (doorEntered || touchY == null || !e.touches?.length) return;
+    const y = e.touches[0].clientY;
+    const dy = touchY - y;
+    touchY = y;
+    if (Math.abs(dy) < 0.5) return;
+    onWheel({
+      deltaY: dy,
+      deltaMode: 0,
+      preventDefault() {
+        e.preventDefault();
+      },
+    });
+  };
+  const onTouchEnd = () => {
+    touchY = null;
+  };
+  if (window.__boringDoorTouch) {
+    const prev = window.__boringDoorTouch;
+    window.removeEventListener("touchstart", prev.start);
+    window.removeEventListener("touchmove", prev.move);
+    window.removeEventListener("touchend", prev.end);
+    window.removeEventListener("touchcancel", prev.end);
+  }
+  window.__boringDoorTouch = {
+    start: onTouchStart,
+    move: onTouchMove,
+    end: onTouchEnd,
+  };
+  window.addEventListener("touchstart", onTouchStart, { passive: true });
+  window.addEventListener("touchmove", onTouchMove, { passive: false });
+  window.addEventListener("touchend", onTouchEnd, { passive: true });
+  window.addEventListener("touchcancel", onTouchEnd, { passive: true });
+
   let flipClock = performance.now();
+  let armed = false;
+  function armDoor() {
+    if (armed) return;
+    armed = true;
+    window.dispatchEvent(new CustomEvent("card-door:armed"));
+  }
+
+  let pageHidden = document.hidden;
 
   function frame(now) {
+    if (pageHidden || doorEntered) return;
+    frameClock = requestAnimationFrame(frame);
     css.fps.tick(now);
     css.tickForces();
 
@@ -1818,13 +1927,14 @@ function boot() {
           if (Math.abs(pendingFoldDelta) > 0.001) {
             const carried = pendingFoldDelta / SCROLL_GAIN;
             pendingFoldDelta = 0;
+            const view = measureDoorViewport();
             const next = advanceHorizon({
               fold: 1,
               hold: holdTarget,
               path: pathTarget,
               deltaPx: carried,
-              viewportHeight: cssRoot.clientHeight,
-              viewportWidth: cssRoot.clientWidth,
+              viewportHeight: view.h,
+              viewportWidth: view.w,
             });
             if (next.kind !== "fold") {
               holdTarget = next.hold;
@@ -1872,25 +1982,44 @@ function boot() {
     }
 
     css.applyPose(pose, falling || phase === "settling");
-    if (!doorEntered) requestAnimationFrame(frame);
   }
+
+  document.addEventListener("visibilitychange", () => {
+    pageHidden = document.hidden;
+    if (pageHidden) {
+      window.cancelAnimationFrame(frameClock);
+      frameClock = 0;
+      return;
+    }
+    if (!doorEntered && !frameClock) {
+      frameClock = requestAnimationFrame(frame);
+    }
+  });
 
   css.setCard(CARD);
   drop();
   buildSiteNav();
   syncStaircase();
   applyHorizon();
-  window.addEventListener("resize", () => {
+  const onViewportChange = () => {
     syncStaircase();
     applyHorizon();
-  });
+  };
+  window.addEventListener("resize", onViewportChange);
+  window.visualViewport?.addEventListener("resize", onViewportChange);
+  window.visualViewport?.addEventListener("scroll", onViewportChange);
   if (startDebug || prefersReducedMotion()) {
     phase = "settled";
     css.setInteractive(true);
     css.applyPose(settlePose(1), false);
     updateSiteNav("01");
   }
-  requestAnimationFrame(frame);
+  frameClock = requestAnimationFrame((now) => {
+    syncStaircase();
+    applyHorizon();
+    armDoor();
+    frame(now);
+  });
 
   replay?.addEventListener("click", freshDrop);
 
