@@ -1,8 +1,8 @@
 .card-door {
-  --paper: #f2eee8;
+  --paper: #e8e6e0;
   --ink: #1a1814;
   --amber: #c9a36a;
-  --floor: #f2eee8;
+  --floor: #e4dfd4;
   --muted: rgba(26, 24, 20, 0.55);
   position: fixed;
   inset: 0;
@@ -1145,7 +1145,10 @@ body.is-lab .pane-fps {
   -webkit-backface-visibility: hidden;
 }
 
-.fold-panel__print .physical-card__texture-lit,
+.fold-panel__print .physical-card__texture-lit {
+  mix-blend-mode: soft-light;
+}
+
 .fold-panel__print .physical-card__ink-relief,
 .fold-panel__print .physical-card__ink-fill--pores {
   mix-blend-mode: normal;
@@ -1161,7 +1164,7 @@ body.is-lab .pane-fps {
 
 .fold-panel__print .physical-card {
   --card-width: 100%;
-  --paper-lit-opacity: 0.1;
+  --paper-lit-opacity: 0.14;
   width: 100%;
   height: 100%;
   aspect-ratio: unset;
