@@ -502,14 +502,46 @@ function createCssEngine(root, materials, opts = {}) {
 
   let hatchVideoReady = false;
 
+  function hatchVideoEl() {
+    return hatchWell?.querySelector(".css-hatch-video") ?? null;
+  }
+
+  function armHatchVideo(video) {
+    if (!(video instanceof HTMLVideoElement)) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.loop = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+  }
+
+  function kickHatchVideo() {
+    if (skipHatchVideo) return;
+    const video = hatchVideoEl();
+    if (!video) return;
+    armHatchVideo(video);
+    const play = () => {
+      const run = video.play();
+      if (run && typeof run.catch === "function") run.catch(() => {});
+    };
+    play();
+    if (video.readyState < 2) {
+      video.addEventListener("loadeddata", play, { once: true });
+      video.addEventListener("canplay", play, { once: true });
+    }
+  }
+
   function applyHatchVideo() {
     if (!hatchWell) return;
     const vars = hatchVideoVars();
     for (const [key, value] of Object.entries(vars)) {
       hatchWell.style.setProperty(key, value);
     }
-    const video = hatchWell.querySelector(".css-hatch-video");
+    const video = hatchVideoEl();
     if (!video) return;
+    armHatchVideo(video);
     const source = hatchVideoSource(HATCH_VIDEO.format);
     let tag = video.querySelector("source");
     if (!tag) {
@@ -526,13 +558,14 @@ function createCssEngine(root, materials, opts = {}) {
     if (source.id !== HATCH_VIDEO.format) {
       setHatchVideo({ format: source.id });
     }
-    video.play?.()?.catch(() => {});
+    kickHatchVideo();
     hatchVideoReady = true;
   }
 
   function ensureHatchVideo() {
-    if (hatchVideoReady || skipHatchVideo) return;
-    applyHatchVideo();
+    if (skipHatchVideo) return;
+    if (!hatchVideoReady) applyHatchVideo();
+    else kickHatchVideo();
   }
 
   applyLayerZ();
@@ -551,7 +584,7 @@ function createCssEngine(root, materials, opts = {}) {
       hatchWell.style.clipPath = "inset(100% 0 0 0)";
       hatchCover.style.transform = "none";
       hatchCover.style.setProperty("--hatch-open", "0");
-      const video = hatchWell.querySelector(".css-hatch-video");
+      const video = hatchVideoEl();
       if (video && !video.paused) video.pause();
       return;
     }
@@ -924,6 +957,7 @@ function createCssEngine(root, materials, opts = {}) {
     setHatchVideo() {
       applyHatchVideo();
     },
+    kickHatchVideo,
     getCursorFlatness() {
       return (
         Math.abs(force.rotX) +
@@ -1022,7 +1056,8 @@ function boot() {
   );
 
   const css = createCssEngine(cssRoot, materials, {
-    skipHatchVideo: lite,
+    skipHatchVideo: window.matchMedia("(prefers-reduced-motion: reduce)")
+      .matches,
   });
   css.setLitBase(mat.litOpacity);
   if (cssRoot) {
@@ -1085,6 +1120,7 @@ function boot() {
     if (!stair) return;
     const pose = trackPose(pathDisplay, stair);
     horizonTrack.style.transform = `translate3d(${-pose.x}px, ${-pose.y}px, 0)`;
+    cssRoot.classList.toggle("is-hopping", pathDisplay > 0.001 || pose.x > 0.5);
     const cornerPx = stair.vw * (HORIZON.cornerVw ?? 1);
     const pageX = Math.max(0, cornerPx - pose.x);
     document.querySelectorAll("[data-home-scroll]").forEach((el) => {
@@ -1855,6 +1891,7 @@ function boot() {
   const onTouchStart = (e) => {
     if (doorEntered || !e.touches?.length) return;
     touchY = e.touches[0].clientY;
+    if (foldDisplay > 0.001) css.kickHatchVideo();
   };
   const onTouchMove = (e) => {
     if (doorEntered || touchY == null || !e.touches?.length) return;

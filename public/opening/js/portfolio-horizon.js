@@ -396,6 +396,12 @@ export function applyStaircaseLayout(track, staircase) {
   track.style.width = `${staircase.width}px`;
   track.style.height = `${staircase.height}px`;
   track.style.setProperty("--horizon-vw", `${staircase.vw}px`);
+  const handVh =
+    staircase.vw <= 719
+      ? 0.52
+      : 0.7;
+  const handH = Math.max(1, Math.round(staircase.vh * handVh));
+  track.style.setProperty("--door-hand-h", `${handH}px`);
   for (const col of staircase.layout) {
     const el = track.querySelector(`[data-station="${col.id}"]`);
     if (!el) continue;
