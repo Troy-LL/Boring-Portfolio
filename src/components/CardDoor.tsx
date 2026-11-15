@@ -4,12 +4,12 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 const SEEN_KEY = "boring-card-door";
-const SCRIPT_SRC = "/opening/js/card-lab.js?v=13";
+const SCRIPT_SRC = "/opening/js/card-lab.js?v=14";
 const FAILSAFE_MS = 5000;
 const SHEETS = [
-  "/opening/css/Card.css?v=13",
-  "/opening/css/card-back-fonts.css?v=13",
-  "/opening/css/card-lab.css?v=13",
+  "/opening/css/Card.css?v=14",
+  "/opening/css/card-back-fonts.css?v=14",
+  "/opening/css/card-lab.css?v=14",
 ];
 const DOOR_COVER = `
 .card-door {
@@ -24,7 +24,7 @@ const DOOR_COVER = `
   background: transparent;
 }
 .card-door:not(.is-ready) {
-  background: #e4dfd4;
+  background: #f2eee8;
 }
 .card-door:not(.is-ready) .site-stage {
   visibility: hidden;

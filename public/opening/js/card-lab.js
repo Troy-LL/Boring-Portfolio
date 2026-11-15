@@ -1120,7 +1120,7 @@ function boot() {
     if (!stair) return;
     const pose = trackPose(pathDisplay, stair);
     horizonTrack.style.transform = `translate3d(${-pose.x}px, ${-pose.y}px, 0)`;
-    cssRoot.classList.toggle("is-hopping", pathDisplay > 0.001 || pose.x > 0.5);
+    cssRoot.classList.toggle("is-hopping", pathDisplay > 0.001);
     const cornerPx = stair.vw * (HORIZON.cornerVw ?? 1);
     const pageX = Math.max(0, cornerPx - pose.x);
     document.querySelectorAll("[data-home-scroll]").forEach((el) => {
