@@ -1,8 +1,8 @@
 .card-door {
-  --paper: #e8e6e0;
+  --paper: #f2eee8;
   --ink: #1a1814;
   --amber: #c9a36a;
-  --floor: #e4dfd4;
+  --floor: #f2eee8;
   --muted: rgba(26, 24, 20, 0.55);
   position: fixed;
   inset: 0;
@@ -182,7 +182,7 @@ body.is-lab .site-stage {
 .pane {
   position: relative;
   flex: 1;
-  background: var(--floor);
+  background: transparent;
   min-height: 100%;
   overflow: hidden;
 }
@@ -234,7 +234,7 @@ body.is-lab .pane-fps {
 }
 
 .horizon-hand {
-  --hand-h: 70%;
+  --hand-h: var(--door-hand-h, 70dvh);
   --hand-unit: calc(var(--hand-h) / 684);
   --hand-front-w: calc(310 * var(--hand-unit));
   --hand-back-w: calc(174 * var(--hand-unit));
@@ -245,6 +245,8 @@ body.is-lab .pane-fps {
   overflow: visible;
   pointer-events: none;
   user-select: none;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .horizon-hand--front {
@@ -268,6 +270,11 @@ body.is-lab .pane-fps {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+}
+
+.css-stage.is-hopping .horizon-hand {
+  opacity: 1;
+  visibility: visible;
 }
 
 .horizon-hand__img {
@@ -297,7 +304,11 @@ body.is-lab .pane-fps {
 
 @media (max-width: 719px) {
   .horizon-hand {
-    display: none;
+    --hand-h: var(--door-hand-h, 52dvh);
+  }
+
+  .horizon-hand--front .horizon-hand__img {
+    filter: none;
   }
 }
 

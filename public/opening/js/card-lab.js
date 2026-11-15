@@ -25,6 +25,7 @@ import {
   hatchApertureVars,
   hatchVideoSource,
   hatchVideoVars,
+  HATCH_VIDEO_POSTER,
   panelAngles,
   panelShade,
   panelShadeFromAngles,
@@ -502,36 +503,81 @@ function createCssEngine(root, materials, opts = {}) {
 
   let hatchVideoReady = false;
 
-  function applyHatchVideo() {
+  function hatchVideoEl() {
+    return hatchWell?.querySelector(".css-hatch-video") ?? null;
+  }
+
+  function armHatchVideo(video) {
+    if (!(video instanceof HTMLVideoElement)) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.loop = true;
+    video.preload = "auto";
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+    video.setAttribute("preload", "auto");
+    if (!video.getAttribute("poster")) {
+      video.setAttribute("poster", HATCH_VIDEO_POSTER);
+    }
+  }
+
+  function kickHatchVideo() {
+    if (skipHatchVideo) return;
+    const video = hatchVideoEl();
+    if (!video) return;
+    armHatchVideo(video);
+    const play = () => {
+      const run = video.play();
+      if (run && typeof run.catch === "function") run.catch(() => {});
+    };
+    play();
+    video.addEventListener("loadeddata", play, { once: true });
+    video.addEventListener("canplay", play, { once: true });
+    video.addEventListener("canplaythrough", play, { once: true });
+  }
+
+  function applyHatchVideo(forceFormat = false) {
     if (!hatchWell) return;
     const vars = hatchVideoVars();
     for (const [key, value] of Object.entries(vars)) {
       hatchWell.style.setProperty(key, value);
     }
-    const video = hatchWell.querySelector(".css-hatch-video");
+    const video = hatchVideoEl();
     if (!video) return;
+    armHatchVideo(video);
+    const hasMarkupSources = video.querySelectorAll("source").length > 0;
     const source = hatchVideoSource(HATCH_VIDEO.format);
-    let tag = video.querySelector("source");
-    if (!tag) {
-      tag = document.createElement("source");
-      video.appendChild(tag);
-    }
-    const currentSrc = tag.getAttribute("src") || "";
-    if (currentSrc !== source.src) {
-      video.pause();
-      tag.src = source.src;
-      tag.type = source.type;
-      video.load();
-    }
     if (source.id !== HATCH_VIDEO.format) {
       setHatchVideo({ format: source.id });
     }
-    video.play?.()?.catch(() => {});
+    if (forceFormat || !hasMarkupSources) {
+      const nextSrc = new URL(source.src, window.location.origin).href;
+      const current = video.currentSrc || video.src || "";
+      if (forceFormat || current !== nextSrc) {
+        video.pause();
+        video.removeAttribute("src");
+        while (video.firstChild) video.removeChild(video.firstChild);
+        const tag = document.createElement("source");
+        tag.src = source.src;
+        tag.type = source.type;
+        video.appendChild(tag);
+        video.load();
+      }
+    }
+    kickHatchVideo();
     hatchVideoReady = true;
   }
 
   function ensureHatchVideo() {
-    if (hatchVideoReady || skipHatchVideo) return;
+    if (skipHatchVideo) return;
+    if (!hatchVideoReady) applyHatchVideo();
+    else kickHatchVideo();
+  }
+
+  function preloadHatchVideo() {
+    if (skipHatchVideo || hatchVideoReady) return;
     applyHatchVideo();
   }
 
@@ -551,7 +597,7 @@ function createCssEngine(root, materials, opts = {}) {
       hatchWell.style.clipPath = "inset(100% 0 0 0)";
       hatchCover.style.transform = "none";
       hatchCover.style.setProperty("--hatch-open", "0");
-      const video = hatchWell.querySelector(".css-hatch-video");
+      const video = hatchVideoEl();
       if (video && !video.paused) video.pause();
       return;
     }
@@ -922,8 +968,10 @@ function createCssEngine(root, materials, opts = {}) {
       applyLayerZ();
     },
     setHatchVideo() {
-      applyHatchVideo();
+      applyHatchVideo(true);
     },
+    kickHatchVideo,
+    preloadHatchVideo,
     getCursorFlatness() {
       return (
         Math.abs(force.rotX) +
@@ -1022,7 +1070,8 @@ function boot() {
   );
 
   const css = createCssEngine(cssRoot, materials, {
-    skipHatchVideo: lite,
+    skipHatchVideo: window.matchMedia("(prefers-reduced-motion: reduce)")
+      .matches,
   });
   css.setLitBase(mat.litOpacity);
   if (cssRoot) {
@@ -1085,6 +1134,7 @@ function boot() {
     if (!stair) return;
     const pose = trackPose(pathDisplay, stair);
     horizonTrack.style.transform = `translate3d(${-pose.x}px, ${-pose.y}px, 0)`;
+    cssRoot.classList.toggle("is-hopping", pathDisplay > 0.001);
     const cornerPx = stair.vw * (HORIZON.cornerVw ?? 1);
     const pageX = Math.max(0, cornerPx - pose.x);
     document.querySelectorAll("[data-home-scroll]").forEach((el) => {
@@ -1855,6 +1905,7 @@ function boot() {
   const onTouchStart = (e) => {
     if (doorEntered || !e.touches?.length) return;
     touchY = e.touches[0].clientY;
+    if (foldDisplay > 0.001) css.kickHatchVideo();
   };
   const onTouchMove = (e) => {
     if (doorEntered || touchY == null || !e.touches?.length) return;
@@ -1922,6 +1973,7 @@ function boot() {
       if (u >= 1) {
         phase = "settled";
         css.setInteractive(true);
+        css.preloadHatchVideo();
         showHintSoon();
         updateSiteNav("01");
       }
@@ -2023,6 +2075,7 @@ function boot() {
     phase = "settled";
     css.setInteractive(true);
     css.applyPose(settlePose(1), false);
+    css.preloadHatchVideo();
     updateSiteNav("01");
   }
   frameClock = requestAnimationFrame((now) => {

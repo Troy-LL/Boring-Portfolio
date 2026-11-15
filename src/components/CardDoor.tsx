@@ -4,12 +4,12 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 const SEEN_KEY = "boring-card-door";
-const SCRIPT_SRC = "/opening/js/card-lab.js?v=11";
+const SCRIPT_SRC = "/opening/js/card-lab.js?v=15";
 const FAILSAFE_MS = 5000;
 const SHEETS = [
-  "/opening/css/Card.css?v=11",
-  "/opening/css/card-back-fonts.css?v=11",
-  "/opening/css/card-lab.css?v=11",
+  "/opening/css/Card.css?v=15",
+  "/opening/css/card-back-fonts.css?v=15",
+  "/opening/css/card-lab.css?v=15",
 ];
 const DOOR_COVER = `
 .card-door {
@@ -24,7 +24,7 @@ const DOOR_COVER = `
   background: transparent;
 }
 .card-door:not(.is-ready) {
-  background: #e4dfd4;
+  background: #f2eee8;
 }
 .card-door:not(.is-ready) .site-stage {
   visibility: hidden;
@@ -199,8 +199,18 @@ export default function CardDoor() {
                               muted
                               loop
                               playsInline
-                              preload="none"
-                            />
+                              preload="auto"
+                              poster="/opening/hatch/IMG_6909-poster.jpg"
+                            >
+                              <source
+                                src="/opening/hatch/IMG_6909-mobile.mp4"
+                                type="video/mp4"
+                              />
+                              <source
+                                src="/opening/hatch/IMG_6909.webm"
+                                type="video/webm"
+                              />
+                            </video>
                             <div className="css-hatch-vignette" />
                           </div>
                           <div className="css-hatch" />
