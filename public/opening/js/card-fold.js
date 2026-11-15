@@ -191,10 +191,18 @@ export function resetHatchOpening() {
   Object.assign(HATCH_OPENING, HATCH_OPENING_DEFAULTS);
 }
 
+export const HATCH_VIDEO_POSTER = "/opening/hatch/IMG_6909-poster.jpg";
+
 export const HATCH_VIDEO_FORMATS = {
   mp4: {
     id: "mp4",
     label: "MP4 · H.264",
+    src: "/opening/hatch/IMG_6909-mobile.mp4",
+    type: "video/mp4",
+  },
+  full: {
+    id: "full",
+    label: "MP4 · full",
     src: "/opening/hatch/IMG_6909.mp4",
     type: "video/mp4",
   },

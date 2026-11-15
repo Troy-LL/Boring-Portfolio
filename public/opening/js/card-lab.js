@@ -25,6 +25,7 @@ import {
   hatchApertureVars,
   hatchVideoSource,
   hatchVideoVars,
+  HATCH_VIDEO_POSTER,
   panelAngles,
   panelShade,
   panelShadeFromAngles,
@@ -512,9 +513,14 @@ function createCssEngine(root, materials, opts = {}) {
     video.defaultMuted = true;
     video.playsInline = true;
     video.loop = true;
+    video.preload = "auto";
     video.setAttribute("muted", "");
     video.setAttribute("playsinline", "");
     video.setAttribute("webkit-playsinline", "");
+    video.setAttribute("preload", "auto");
+    if (!video.getAttribute("poster")) {
+      video.setAttribute("poster", HATCH_VIDEO_POSTER);
+    }
   }
 
   function kickHatchVideo() {
@@ -527,13 +533,12 @@ function createCssEngine(root, materials, opts = {}) {
       if (run && typeof run.catch === "function") run.catch(() => {});
     };
     play();
-    if (video.readyState < 2) {
-      video.addEventListener("loadeddata", play, { once: true });
-      video.addEventListener("canplay", play, { once: true });
-    }
+    video.addEventListener("loadeddata", play, { once: true });
+    video.addEventListener("canplay", play, { once: true });
+    video.addEventListener("canplaythrough", play, { once: true });
   }
 
-  function applyHatchVideo() {
+  function applyHatchVideo(forceFormat = false) {
     if (!hatchWell) return;
     const vars = hatchVideoVars();
     for (const [key, value] of Object.entries(vars)) {
@@ -542,21 +547,24 @@ function createCssEngine(root, materials, opts = {}) {
     const video = hatchVideoEl();
     if (!video) return;
     armHatchVideo(video);
+    const hasMarkupSources = video.querySelectorAll("source").length > 0;
     const source = hatchVideoSource(HATCH_VIDEO.format);
-    let tag = video.querySelector("source");
-    if (!tag) {
-      tag = document.createElement("source");
-      video.appendChild(tag);
-    }
-    const currentSrc = tag.getAttribute("src") || "";
-    if (currentSrc !== source.src) {
-      video.pause();
-      tag.src = source.src;
-      tag.type = source.type;
-      video.load();
-    }
     if (source.id !== HATCH_VIDEO.format) {
       setHatchVideo({ format: source.id });
+    }
+    if (forceFormat || !hasMarkupSources) {
+      const nextSrc = new URL(source.src, window.location.origin).href;
+      const current = video.currentSrc || video.src || "";
+      if (forceFormat || current !== nextSrc) {
+        video.pause();
+        video.removeAttribute("src");
+        while (video.firstChild) video.removeChild(video.firstChild);
+        const tag = document.createElement("source");
+        tag.src = source.src;
+        tag.type = source.type;
+        video.appendChild(tag);
+        video.load();
+      }
     }
     kickHatchVideo();
     hatchVideoReady = true;
@@ -566,6 +574,11 @@ function createCssEngine(root, materials, opts = {}) {
     if (skipHatchVideo) return;
     if (!hatchVideoReady) applyHatchVideo();
     else kickHatchVideo();
+  }
+
+  function preloadHatchVideo() {
+    if (skipHatchVideo || hatchVideoReady) return;
+    applyHatchVideo();
   }
 
   applyLayerZ();
@@ -955,9 +968,10 @@ function createCssEngine(root, materials, opts = {}) {
       applyLayerZ();
     },
     setHatchVideo() {
-      applyHatchVideo();
+      applyHatchVideo(true);
     },
     kickHatchVideo,
+    preloadHatchVideo,
     getCursorFlatness() {
       return (
         Math.abs(force.rotX) +
@@ -1959,6 +1973,7 @@ function boot() {
       if (u >= 1) {
         phase = "settled";
         css.setInteractive(true);
+        css.preloadHatchVideo();
         showHintSoon();
         updateSiteNav("01");
       }
@@ -2060,6 +2075,7 @@ function boot() {
     phase = "settled";
     css.setInteractive(true);
     css.applyPose(settlePose(1), false);
+    css.preloadHatchVideo();
     updateSiteNav("01");
   }
   frameClock = requestAnimationFrame((now) => {
